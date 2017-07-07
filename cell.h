@@ -27,7 +27,7 @@ private:
 
 public:
 
-Cell(const color,const empty);
+Cell(const unsigned color,const bool empty);
 Cell (const Cell & cell);
 
 unsigned getColor();
@@ -45,7 +45,7 @@ inline unsigned Cell::getColor()
 
 inline bool Cell::isEmpty()
 {
-    return isEmpty;
+    return empty;
 }
 
 #endif // CELL_H
