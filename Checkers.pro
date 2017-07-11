@@ -6,9 +6,11 @@ CONFIG -= qt
 SOURCES += main.cpp \
     point.cpp \
     cell.cpp \
-    pointtest.cpp
+    pointtest.cpp \
+    board.cpp
 
 HEADERS += \
     point.h \
     cell.h \
-    catch.h
+    catch.h \
+    board.h
