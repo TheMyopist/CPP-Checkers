@@ -11,27 +11,26 @@ bool board::isCellEmpty(Cell &cell) const
     return cell.isEmpty();
 }
 
-void board::colorizeBoard() //améliorer coding style et supprimer warnings
+void board::colorizeBoard()
 {
-    bool black = false;
+    for (int i = 0; i < height; i++ )
+    {
+        unsigned color = (i % 2 == 0) ? BLACK : WHITE;
 
-    for (int i = 0; i < height*width; i++)
-            grid.at(i/width).at(i%width) = (black = !black);
+        for (int j = 0; j < width; j++ )
+        {
+            colorizeCell(Point{i,j}, color);
+            color = (color == BLACK) ? WHITE : BLACK;
+        }
+    }
 }
+
 
 void board::colorizeCell(const Point & position, const unsigned color)
 {
     getCellAt(position).colorize(color);
 }
 
-void board::colorizeLine(const unsigned row)
-{
-    std::vector<Cell> & lineToColor = getLine(row);
-
-    if(row%2 == 0 || row == 0)
-        for(auto j = 0; j < lineToColor.size(); j++)
-            if(j%2 != 0)
 
 
 
-}
