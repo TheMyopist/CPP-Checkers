@@ -30,20 +30,21 @@ public:
 Cell(const unsigned color,const bool empty);
 Cell (const Cell & cell);
 
-unsigned getColor();
+unsigned getColor() const;
 void clear();
-bool isEmpty();
+bool isEmpty() const;
 void colorize(const unsigned);
+void fill();
 
 
 };
 
-inline unsigned Cell::getColor()
+inline unsigned Cell::getColor() const
 {
     return color;
 }
 
-inline bool Cell::isEmpty()
+inline bool Cell::isEmpty() const
 {
     return empty;
 }

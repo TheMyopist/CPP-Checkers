@@ -1,8 +1,12 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#define DEFAULTHEIGHT 10
+#define DEFAULTWIDTH 10
+
 #include "cell.h"
 #include "point.h"
+#include <vector>
 
 class board
 {
@@ -16,29 +20,27 @@ private:
 
 public:
 
-    Board(unsigned int,unsigned int):
-    Board();
-
+    board(const unsigned = DEFAULTHEIGHT,const unsigned = DEFAULTWIDTH);
     unsigned int getHeight() const;
     unsigned int getWidth() const;
-    Cell getCellAt(const Point &);
-    bool isCellEmpty(Cell) const; //avec getCellAt (ou bien aussi donner pos)
+    Cell & getCellAt(const Point &); //const?
+    bool isCellEmpty(Cell &) const; //avec getCellAt (ou bien aussi donner pos)
 
 
 
 };
 
-inline unsigned int getHeight() const
+inline unsigned int board::getHeight() const
 {
     return height;
 }
 
-inline unsigned int getWidth() const
+inline unsigned int board::getWidth() const
 {
     return width;
 }
 
-inline Cell & Board::getCellAt(const Point & position)
+inline Cell &board::getCellAt(const Point & position) //const //const impossible de convertir de const Cell en Cell &
 {
     return grid.at(position.getX()).at(position.getY());
 }
