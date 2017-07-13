@@ -13,10 +13,13 @@ bool board::isCellEmpty(Cell &cell) const
 
 void board::colorizeBoard() //améliorer coding style et supprimer warnings
 {
-    bool black = false;
-
-    for (int i = 0; i < height*width; i++)
-            grid.at(i/width).at(i%width) = (black = !black);
+    unsigned cellNumber = 0;
+    
+    for (unsigned i =0; i < width; i++ )
+        for (unsigned j =0; j < height; j++ )
+            board[j][i] = (cellNumber++ % 2 == 0) 
+                    ? colorizeCell(Point {j,i},WHITE) 
+                    : colorizeCell(Point {j,i},BLACK);
 }
 
 void board::colorizeCell(const Point & position, const unsigned color)

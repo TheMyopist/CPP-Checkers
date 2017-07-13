@@ -17,6 +17,9 @@ private:
     unsigned int width;
     std::vector <std::vector<Cell>> grid;
 
+     void colorizeCell(const Point &, const unsigned);
+     void colorizeLine(const unsigned);
+
 
 public:
 
@@ -24,7 +27,9 @@ public:
     unsigned int getHeight() const;
     unsigned int getWidth() const;
     Cell & getCellAt(const Point &); //const?
+    std::vector<Cell> & getLine(const unsigned);
     bool isCellEmpty(Cell &) const; //avec getCellAt (ou bien aussi donner pos)
+    void colorizeBoard();
 
 
 
@@ -43,6 +48,12 @@ inline unsigned int board::getWidth() const
 inline Cell &board::getCellAt(const Point & position) //const //const impossible de convertir de const Cell en Cell &
 {
     return grid.at(position.getX()).at(position.getY());
+}
+
+inline std::vector<Cell> & board::getLine(const unsigned row)
+{
+
+    return grid.at(row);
 }
 
 #endif // BOARD_H
