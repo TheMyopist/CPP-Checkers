@@ -31,6 +31,9 @@ void board::colorizeCell(const Point & position, const unsigned color)
     getCellAt(position).colorize(color);
 }
 
-
+void board::clearCell(const Point & position)
+{
+    getCellAt(position).clear();
+}
 
 

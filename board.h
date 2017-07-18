@@ -29,6 +29,7 @@ public:
     Cell & getCellAt(const Point &); //const?
     std::vector<Cell> & getLine(const unsigned);
     bool isCellEmpty(Cell &) const; //avec getCellAt (ou bien aussi donner pos)
+    void clearCell(const Point &);
     void colorize();
 
 
