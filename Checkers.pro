@@ -1,5 +1,5 @@
 TEMPLATE = app
-CONFIG += console c++11
+CONFIG += console c++14
 CONFIG -= app_bundle
 CONFIG -= qt
 
@@ -7,7 +7,8 @@ SOURCES += main.cpp \
     point.cpp \
     cell.cpp \
     pointtest.cpp \
-    board.cpp
+    board.cpp \
+    tests-main.cpp
 
 HEADERS += \
     point.h \
