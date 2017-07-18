@@ -26,10 +26,9 @@ TEST_CASE("Coloriage d'une cellule")
     michaelJackson.colorize(WHITE);
 
     REQUIRE(michaelJackson.getColor() == WHITE);
-
 }
 
-TEST_CASE("Remplissage et nettoyage d'une cellule","[widget]")
+TEST_CASE("Remplissage et nettoyage d'une cellule")
 {
     Cell emptyCell{GREEN,true};
 

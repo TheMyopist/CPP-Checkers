@@ -11,7 +11,7 @@ bool board::isCellEmpty(Cell &cell) const
     return cell.isEmpty();
 }
 
-void board::colorizeBoard()
+void board::colorize()
 {
     for (int i = 0; i < height; i++ )
     {

@@ -23,13 +23,13 @@ private:
 
 public:
 
-    board(const unsigned = DEFAULTHEIGHT,const unsigned = DEFAULTWIDTH);
+    board(const unsigned = DEFAULTHEIGHT, const unsigned = DEFAULTWIDTH);
     unsigned int getHeight() const;
     unsigned int getWidth() const;
     Cell & getCellAt(const Point &); //const?
     std::vector<Cell> & getLine(const unsigned);
     bool isCellEmpty(Cell &) const; //avec getCellAt (ou bien aussi donner pos)
-    void colorizeBoard();
+    void colorize();
 
 
 
