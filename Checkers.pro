@@ -8,7 +8,9 @@ SOURCES += main.cpp \
     cell.cpp \
     pointtest.cpp \
     board.cpp \
-    tests-main.cpp
+    tests-main.cpp \
+    celltest.cpp \
+    boardtest.cpp
 
 HEADERS += \
     point.h \
