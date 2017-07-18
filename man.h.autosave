@@ -1,0 +1,31 @@
+#ifndef MAN_H
+#define MAN_H
+
+
+class Man
+{
+    
+private:
+    
+    unsigned color;
+    Point position;
+    bool isAlive; //?
+    //bool isKing;
+    
+public:
+    
+    unsigned getColor() const;
+    Point & getPosition() const;
+    
+    void move(Point newPosition);
+    //void fly(Point newPosition); if isKing
+    
+    void crown();
+    void capture(Point position); //remove le pion de la pos intermédiaire
+    void remove();
+    
+    
+    
+};
+
+#endif // MAN_H

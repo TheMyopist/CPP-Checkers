@@ -8,12 +8,13 @@ SOURCES += main.cpp \
     cell.cpp \
     pointtest.cpp \
     board.cpp \
-    tests-main.cpp \
     celltest.cpp \
-    boardtest.cpp
+    boardtest.cpp \
+    man.cpp
 
 HEADERS += \
     point.h \
     cell.h \
     catch.h \
-    board.h
+    board.h \
+    man.h

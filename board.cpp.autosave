@@ -4,37 +4,36 @@
 board::board(const unsigned int height, const unsigned int width)
     : height{height}, width{width},
       grid(height,
-            std::vector<Cell>(width,{BLACK,true})) {}//ajouter les noires ici? //[row][column]{}
+            std::vector<Cell>(width,{GREY,true})) {} //[row][column]{}
 
 bool board::isCellEmpty(Cell &cell) const
 {
     return cell.isEmpty();
 }
 
-void board::colorizeBoard() //améliorer coding style et supprimer warnings
+void board::colorize()
 {
-    unsigned cellNumber = 0;
-    
-    for (unsigned i =0; i < width; i++ )
-        for (unsigned j =0; j < height; j++ )
-            board[j][i] = (cellNumber++ % 2 == 0) 
-                    ? colorizeCell(Point {j,i},WHITE) 
-                    : colorizeCell(Point {j,i},BLACK);
+    for (int i = 0; i < height; i++ )
+    {
+        unsigned color = (i % 2 == 0) ? BLACK : WHITE;
+
+        for (int j = 0; j < width; j++ )
+        {
+            colorizeCell(Point{i,j}, color);
+            color = (color == BLACK) ? WHITE : BLACK;
+        }
+    }
 }
+
 
 void board::colorizeCell(const Point & position, const unsigned color)
 {
     getCellAt(position).colorize(color);
 }
 
-void board::colorizeLine(const unsigned row)
+void board::clearCell(const Point & position)
 {
-    std::vector<Cell> & lineToColor = getLine(row);
-
-    if(row%2 == 0 || row == 0)
-        for(auto j = 0; j < lineToColor.size(); j++)
-            if(j%2 != 0)
-
-
-
+    getCellAt(position).clear();
 }
+
+
