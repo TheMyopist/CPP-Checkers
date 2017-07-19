@@ -15,7 +15,6 @@ private:
     std::vector<Player> players;
     unsigned turn;
     bool multiplayer; //par défaut on joue contre IA
-    Man currentMan; //? ou dans player
 
 
 public:
@@ -37,7 +36,6 @@ public:
     void capture();
     void walkoff();
     void surrender();
-
 
 };
 
