@@ -1,17 +1,17 @@
 #include "board.h"
 
 
-board::board(const unsigned int height, const unsigned int width)
+Board::Board(const unsigned int height, const unsigned int width)
     : height{height}, width{width},
       grid(height,
             std::vector<Cell>(width,{GREY,true})) {} //[row][column]{}
 
-bool board::isCellEmpty(Cell &cell) const
+bool Board::isCellEmpty(Cell &cell) const
 {
     return cell.isEmpty();
 }
 
-void board::colorize()
+void Board::colorize()
 {
     for (int i = 0; i < height; i++ )
     {
@@ -26,12 +26,12 @@ void board::colorize()
 }
 
 
-void board::colorizeCell(const Point & position, const unsigned color)
+void Board::colorizeCell(const Point & position, const unsigned color)
 {
     getCellAt(position).colorize(color);
 }
 
-void board::clearCell(const Point & position)
+void Board::clearCell(const Point & position)
 {
     getCellAt(position).clear();
 }

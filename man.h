@@ -10,14 +10,13 @@ class Man
 private:
 
     unsigned color;
-    Point position;
-    bool isAlive; //?
-    //bool isKing;
+    bool isKing;
 
 public:
 
+    Man(const unsigned);
+
     unsigned getColor() const;
-    Point & getPosition() const;
 
     void move(Point newPosition);
     //void fly(Point newPosition); if isKing
@@ -28,5 +27,12 @@ public:
 
 
 };
+
+inline unsigned Man::getColor() const
+{
+    return color;
+}
+
+
 
 #endif // MAN_H

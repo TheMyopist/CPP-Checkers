@@ -4,8 +4,8 @@
 
 TEST_CASE("Construction de boards")
 {
-    board defaultBoard{};
-    board customBoard{44,67};
+    Board defaultBoard{};
+    Board customBoard{44,67};
 
     REQUIRE(defaultBoard.getHeight() == DEFAULTHEIGHT);
     REQUIRE(defaultBoard.getWidth() == DEFAULTWIDTH);
@@ -20,7 +20,7 @@ TEST_CASE("Construction de boards")
 
 TEST_CASE("Coloriage d'un board")
 {
-    board greyBoard{};
+    Board greyBoard{};
     greyBoard.colorize();
 
     REQUIRE(greyBoard.getCellAt(Point{0,0}).getColor() == BLACK);

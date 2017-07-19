@@ -8,7 +8,7 @@
 #include "point.h"
 #include <vector>
 
-class board
+class Board
 {
 
 private:
@@ -23,7 +23,7 @@ private:
 
 public:
 
-    board(const unsigned = DEFAULTHEIGHT, const unsigned = DEFAULTWIDTH);
+    Board(const unsigned = DEFAULTHEIGHT, const unsigned = DEFAULTWIDTH);
     unsigned int getHeight() const;
     unsigned int getWidth() const;
     Cell & getCellAt(const Point &); //const?
@@ -36,22 +36,22 @@ public:
 
 };
 
-inline unsigned int board::getHeight() const
+inline unsigned int Board::getHeight() const
 {
     return height;
 }
 
-inline unsigned int board::getWidth() const
+inline unsigned int Board::getWidth() const
 {
     return width;
 }
 
-inline Cell &board::getCellAt(const Point & position) //const //const impossible de convertir de const Cell en Cell &
+inline Cell &Board::getCellAt(const Point & position) //const //const impossible de convertir de const Cell en Cell &
 {
     return grid.at(position.getX()).at(position.getY());
 }
 
-inline std::vector<Cell> & board::getLine(const unsigned row)
+inline std::vector<Cell> & Board::getLine(const unsigned row)
 {
 
     return grid.at(row);

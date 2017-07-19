@@ -10,11 +10,15 @@ SOURCES += main.cpp \
     board.cpp \
     celltest.cpp \
     boardtest.cpp \
-    man.cpp
+    man.cpp \
+    checkers.cpp \
+    player.cpp
 
 HEADERS += \
     point.h \
     cell.h \
     catch.h \
     board.h \
-    man.h
+    man.h \
+    checkers.h \
+    player.h
