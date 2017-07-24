@@ -42,7 +42,9 @@ void Board::initWhiteMen()
     {
         for (int j = 0; j < (int)width; j++ )
         {
-            getCellAt(Point{i,j}).addMan(WHITE);
+            Point position{i,j};
+            if(getCellAt(position).getColor() == BLACK)
+            getCellAt(position).addMan(WHITE);
         }
     }
 }
@@ -54,7 +56,9 @@ void Board::initBlackMen()
     {
         for (int j = 0; j < (int)width; j++ )
         {
-            getCellAt(Point{i,j}).addMan(BLACK);
+            Point position{i,j};
+            if(getCellAt(position).getColor() == BLACK)
+            getCellAt(position).addMan(BLACK);
         }
     }
 }
