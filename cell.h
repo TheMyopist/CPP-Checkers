@@ -26,14 +26,18 @@ private:
     */
     bool empty;
 
+    /**
+    * \brief Man, la potentielle dame qui occupe la cellule. Cet
+    * attribut est, de fait, couplé à l'attribut empty.
+    */
     Man man;
 
 
 public:
 
     /**
-    * \brief Instancie une case selon la couleur et l'état spécifiés
-    * en paramètres.
+    * \brief Instancie une case selon la couleur spécifiée en
+    * paramètre.
     */
     Cell(const unsigned color);
 
@@ -45,10 +49,15 @@ public:
     /**
     * \brief Retourne la couleur de la case
     * \return La valeur hexadécimale convertie en valeur décimale
-    * de la couleur de la case
+    * de la couleur de la case.
     */
     unsigned getColor() const;
 
+    /**
+    * \brief Retourne la dame qui occupe la case.
+    * \return Une référence vers l'adresse de la dame qui occupe la
+    * case.
+    */
     Man & getMan();
 
     /**
@@ -70,7 +79,8 @@ public:
     void colorize(const unsigned);
 
     /**
-    * \brief Défini l'état d'une cellule comme étant occupée.
+    * \brief Ajoute une dame de la couleur passée en paramètre sur
+    * la case.
     */
     void addMan(const unsigned);
 

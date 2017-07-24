@@ -2,7 +2,9 @@
 #define COLOR_H
 
 /*!
- * Définition des constantes permettant de colorer la cellule.
+ * Définition des constantes désignant des couleurs à utiliser pour
+ * le jeu de Dames. Ces couleurs sont représentées par leur valeur
+ * hexadécimale.
  */
 #define BLACK 0x000000
 #define WHITE 0xF5F5F5
