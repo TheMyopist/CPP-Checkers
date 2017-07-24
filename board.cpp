@@ -1,10 +1,13 @@
 #include "board.h"
 
-
+//colorie les cell et place les joueurs en position de départ
 Board::Board(const unsigned int height, const unsigned int width)
     : height{height}, width{width},
-      grid(height,
-            std::vector<Cell>(width,{GREY})) {} //[row][column]{}
+      grid(height, std::vector<Cell>(width,{GREY}))
+{
+    colorize();
+    initMen();
+}
 
 bool Board::isCellEmpty(Cell &cell) const
 {
@@ -36,36 +39,24 @@ void Board::clearCell(const Point & position)
     getCellAt(position).clear();
 }
 
-void Board::initWhiteMen()
+
+//cast to int for suppressing const/unsigned incompatibility warnings
+void Board::initMen()
 {
     for (int i = 0; i < 4; i++ )
     {
         for (int j = 0; j < (int)width; j++ )
         {
-            Point position{i,j};
-            if(getCellAt(position).getColor() == BLACK)
-            getCellAt(position).addMan(WHITE);
+            Point positionTop{(int)height-i,(int)width-j};
+            Point positionDown{i,j};
+
+            if(getCellAt(positionTop).getColor() == BLACK)
+            {
+                getCellAt(positionTop).addMan(BLACK);
+                getCellAt(positionDown).addMan(BLACK);
+            }
         }
     }
 }
 
-//cast to int for suppressing const/unsigned incompatibility warnings
-void Board::initBlackMen()
-{
-    for (int i = 9; i > 5; i++ )
-    {
-        for (int j = 0; j < (int)width; j++ )
-        {
-            Point position{i,j};
-            if(getCellAt(position).getColor() == BLACK)
-            getCellAt(position).addMan(BLACK);
-        }
-    }
-}
-
-void Board::initMen()
-{
-    initBlackMen();
-    initWhiteMen();
-}
 

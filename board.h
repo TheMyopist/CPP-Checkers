@@ -18,10 +18,7 @@ private:
     std::vector <std::vector<Cell>> grid;
     
     void colorizeCell(const Point &, const unsigned);
-    void initWhiteMen();
-    void initBlackMen();
-    
-    
+
 public:
     
     Board(const unsigned = DEFAULTHEIGHT, const unsigned = DEFAULTWIDTH);
@@ -37,6 +34,7 @@ public:
     std::vector<Cell> & getCorners(const Point &);
     std::vector<Cell> & getEmptyCorners(const Point &);
     std::vector<Cell> & getFilledCorners(const Point &);
+    std::vector<Cell> & getEnnemiesCorners(const Point &, const unsigned);
     Cell & getUpperLeft(const Point &);
     Cell & getUpperRight(const Point &);
     Cell & getLowerLeft(const Point &);
@@ -71,7 +69,7 @@ inline std::vector<Cell> & Board::getEmptyCorners(const Point & position)
 {
     std::vector<Cell> freeCorners;
     
-    for(Cell corner : getCorners(position))
+    for(Cell & corner : getCorners(position))
     {
         if (corner.isEmpty())
             freeCorners.push_back(corner);
@@ -84,13 +82,27 @@ inline std::vector<Cell> & Board::getFilledCorners(const Point & position)
 {
     std::vector<Cell> filledCorners;
     
-    for(Cell corner : getCorners(position))
+    for(Cell & corner : getCorners(position))
     {
         if (!corner.isEmpty())
             filledCorners.push_back(corner);
     }
     
     return filledCorners;
+}
+
+inline std::vector<Cell> & Board::getEnnemiesCorners(const Point & position, const unsigned color)
+{
+    std::vector<Cell> filledCorners = getFilledCorners(position);
+    std::vector<Cell> ennemies;
+
+    for(Cell & corner : filledCorners)
+    {
+        if (corner.getColor() != color)
+            ennemies.push_back(corner);
+    }
+
+    return ennemies;
 }
 
 inline Cell & Board::getCellAt(const Point & position) //const //const impossible de convertir de const Cell en Cell &
