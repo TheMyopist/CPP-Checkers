@@ -12,7 +12,8 @@ SOURCES += main.cpp \
     boardtest.cpp \
     man.cpp \
     checkers.cpp \
-    player.cpp
+    player.cpp \
+    iaplayer.cpp
 
 HEADERS += \
     point.h \
@@ -21,4 +22,5 @@ HEADERS += \
     board.h \
     man.h \
     checkers.h \
-    player.h
+    player.h \
+    iaplayer.h

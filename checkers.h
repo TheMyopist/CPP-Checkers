@@ -3,6 +3,7 @@
 
 #include "board.h"
 #include "player.h"
+#include "iaplayer.h"
 #include "man.h"
 
 
@@ -18,7 +19,9 @@ private:
 
 
 public:
-    Checkers(bool = false); //par défaut on joue contre l'IA
+    Checkers(const bool = false); //par défaut on joue contre l'IA, voir si const ici ok
+
+    void initPlayers(const bool);
 
     Board & getBoard() const; //le get modifie pas le board, mais le board peut être modifié par une autre fonction qui appellele get
     std::vector<Player> & getPlayers() const;
@@ -32,10 +35,13 @@ public:
 
     //action des joueurs
     void play(); //move,capture,walkoff,surrender selon input
-    void move();
+    void move(); //crown doit se faire auto
     void capture();
     void walkoff();
     void surrender();
+
+    //conséquence action
+    void removeMan();
 
 };
 

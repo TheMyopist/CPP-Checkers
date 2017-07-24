@@ -10,19 +10,19 @@
 
 class Board
 {
-
+    
 private:
-
+    
     unsigned int height;
     unsigned int width;
     std::vector <std::vector<Cell>> grid;
-
-     void colorizeCell(const Point &, const unsigned);
-     void colorizeLine(const unsigned);
-
-
+    
+    void colorizeCell(const Point &, const unsigned);
+    void colorizeLine(const unsigned);
+    
+    
 public:
-
+    
     Board(const unsigned = DEFAULTHEIGHT, const unsigned = DEFAULTWIDTH);
     unsigned int getHeight() const;
     unsigned int getWidth() const;
@@ -30,7 +30,7 @@ public:
     bool isCellEmpty(Cell &) const;
     void clearCell(const Point &);
     void colorize();
-
+    
     //calcul des positions adjacentes à une cell (4 coins)
     std::vector<Cell> & getCorners(const Point &);
     std::vector<Cell> & getEmptyCorners(const Point &);
@@ -39,8 +39,8 @@ public:
     Cell & getUpperRight(const Point &);
     Cell & getLowerLeft(const Point &);
     Cell & getLowerRight(const Point &);
-
-
+    
+    
 };
 
 inline unsigned int Board::getHeight() const
@@ -56,38 +56,38 @@ inline unsigned int Board::getWidth() const
 inline std::vector<Cell> & Board::getCorners(const Point & position)
 {
     std::vector<Cell> corners;
-
+    
     corners.at(0) = getUpperLeft(position);
     corners.at(1) = getUpperRight(position);
     corners.at(2) = getLowerLeft(position);
     corners.at(3) = getLowerRight(position);
-
+    
     return corners;
 }
 
 inline std::vector<Cell> & Board::getEmptyCorners(const Point & position)
 {
     std::vector<Cell> freeCorners;
-
+    
     for(Cell corner : getCorners(position))
     {
         if (corner.isEmpty())
-                freeCorners.push_back(corner);
+            freeCorners.push_back(corner);
     }
-
+    
     return freeCorners;
 }
 
 inline std::vector<Cell> & Board::getFilledCorners(const Point & position)
 {
     std::vector<Cell> filledCorners;
-
+    
     for(Cell corner : getCorners(position))
     {
         if (!corner.isEmpty())
-                filledCorners.push_back(corner);
+            filledCorners.push_back(corner);
     }
-
+    
     return filledCorners;
 }
 
