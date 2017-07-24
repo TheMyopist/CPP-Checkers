@@ -23,4 +23,5 @@ HEADERS += \
     man.h \
     checkers.h \
     player.h \
-    iaplayer.h
+    iaplayer.h \
+    color.h

@@ -4,7 +4,7 @@
 Board::Board(const unsigned int height, const unsigned int width)
     : height{height}, width{width},
       grid(height,
-            std::vector<Cell>(width,{GREY,true})) {} //[row][column]{}
+            std::vector<Cell>(width,{GREY})) {} //[row][column]{}
 
 bool Board::isCellEmpty(Cell &cell) const
 {

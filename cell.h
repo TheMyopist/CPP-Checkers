@@ -1,20 +1,8 @@
 #ifndef CELL_H
 #define CELL_H
 
-/*!
- * Définition des constantes permettant de colorer la cellule.
- */
-#define BLACK 0x000000
-#define WHITE 0xF5F5F5
-#define RED 0xFF0000
-#define BLUE 0x0000FF
-#define GREEN 0x008000
-#define PURPLE 0x800080
-#define ORANGE 0xFFA500
-#define YELLOW 0xFFFF00
-#define PINK 0xFFC0CB
-#define GREY 0x808080
-#define WHITE 0xF5F5F5
+#include "color.h"
+#include "man.h"
 
 /**
  * @brief Cette classe Cell définit une case d'un plateau deu jeu de
@@ -38,7 +26,7 @@ private:
     */
     bool empty;
 
-    //unsigned manColor;
+    Man man;
 
 
 public:
@@ -47,7 +35,7 @@ public:
     * \brief Instancie une case selon la couleur et l'état spécifiés
     * en paramètres.
     */
-    Cell(const unsigned color, const bool empty);
+    Cell(const unsigned color);
 
     /**
     * \brief Instancie une case par copie d'une autre case.
@@ -60,6 +48,8 @@ public:
     * de la couleur de la case
     */
     unsigned getColor() const;
+
+    Man & getMan();
 
     /**
     * \brief Nettoie la case en remettant son attribut empty à true
@@ -82,16 +72,20 @@ public:
     /**
     * \brief Défini l'état d'une cellule comme étant occupée.
     */
-    void fill();
+    void addMan(const unsigned);
 
-    //unsigned getManColor() const;
-    //void setMancolor();
+
 
 };
 
 inline unsigned Cell::getColor() const
 {
     return color;
+}
+
+inline Man & Cell::getMan()
+{
+    return man;
 }
 
 inline bool Cell::isEmpty() const

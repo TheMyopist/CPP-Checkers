@@ -41,7 +41,7 @@ public:
     void surrender();
 
     //conséquence action
-    void removeMan();
+    void removeMan(const Point);
 
 };
 
