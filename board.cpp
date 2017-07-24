@@ -13,11 +13,11 @@ bool Board::isCellEmpty(Cell &cell) const
 
 void Board::colorize()
 {
-    for (int i = 0; i < height; i++ )
+    for (int i = 0; i < (int)height; i++ )
     {
         unsigned color = (i % 2 == 0) ? BLACK : WHITE;
 
-        for (int j = 0; j < width; j++ )
+        for (int j = 0; j < (int)width; j++ )
         {
             colorizeCell(Point{i,j}, color);
             color = (color == BLACK) ? WHITE : BLACK;
@@ -36,4 +36,32 @@ void Board::clearCell(const Point & position)
     getCellAt(position).clear();
 }
 
+void Board::initWhiteMen()
+{
+    for (int i = 0; i < 4; i++ )
+    {
+        for (int j = 0; j < (int)width; j++ )
+        {
+            getCellAt(Point{i,j}).addMan(WHITE);
+        }
+    }
+}
+
+//cast to int for suppressing const/unsigned incompatibility warnings
+void Board::initBlackMen()
+{
+    for (int i = 9; i > 5; i++ )
+    {
+        for (int j = 0; j < (int)width; j++ )
+        {
+            getCellAt(Point{i,j}).addMan(BLACK);
+        }
+    }
+}
+
+void Board::initMen()
+{
+    initBlackMen();
+    initWhiteMen();
+}
 

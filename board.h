@@ -18,7 +18,8 @@ private:
     std::vector <std::vector<Cell>> grid;
     
     void colorizeCell(const Point &, const unsigned);
-    void colorizeLine(const unsigned);
+    void initWhiteMen();
+    void initBlackMen();
     
     
 public:
@@ -30,6 +31,7 @@ public:
     bool isCellEmpty(Cell &) const;
     void clearCell(const Point &);
     void colorize();
+    void initMen();
     
     //calcul des positions adjacentes à une cell (4 coins)
     std::vector<Cell> & getCorners(const Point &);
