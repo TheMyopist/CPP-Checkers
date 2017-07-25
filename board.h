@@ -31,10 +31,12 @@ public:
     void initMen();
     
     //calcul des positions adjacentes à une cell (4 coins)
-    std::vector<Cell> & getCorners(const Point &);
-    std::vector<Cell> & getEmptyCorners(const Point &);
-    std::vector<Cell> & getFilledCorners(const Point &);
-    std::vector<Cell> & getEnnemiesCorners(const Point &, const unsigned);
+    std::vector<Cell>  getCorners(const Point &);
+    std::vector<Cell>  getEmptyCorners(const Point &);
+    std::vector<Point>  getFilledCorners(const Point &);
+    std::vector<Point> getEnnemiesCorners(const Point &, const unsigned);
+    std::vector<Cell> getAttackablePositions(const Point &, const unsigned);
+
     Cell & getUpperLeft(const Point &);
     Cell & getUpperRight(const Point &);
     Cell & getLowerLeft(const Point &);
@@ -53,7 +55,7 @@ inline unsigned int Board::getWidth() const
     return width;
 }
 
-inline std::vector<Cell> & Board::getCorners(const Point & position)
+inline std::vector<Cell> Board::getCorners(const Point & position)
 {
     std::vector<Cell> corners;
     
@@ -65,7 +67,7 @@ inline std::vector<Cell> & Board::getCorners(const Point & position)
     return corners;
 }
 
-inline std::vector<Cell> & Board::getEmptyCorners(const Point & position)
+inline std::vector<Cell> Board::getEmptyCorners(const Point & position)
 {
     std::vector<Cell> freeCorners;
     
@@ -78,27 +80,29 @@ inline std::vector<Cell> & Board::getEmptyCorners(const Point & position)
     return freeCorners;
 }
 
-inline std::vector<Cell> & Board::getFilledCorners(const Point & position)
+inline std::vector<Point> Board::getFilledCorners(const Point & position)
 {
-    std::vector<Cell> filledCorners;
+    std::vector<Point> filledCorners;
     
-    for(Cell & corner : getCorners(position))
+    for(Point & corner : position.getCorners())
     {
-        if (!corner.isEmpty())
+        if (!getCellAt(corner).isEmpty())
             filledCorners.push_back(corner);
     }
     
     return filledCorners;
 }
 
-inline std::vector<Cell> & Board::getEnnemiesCorners(const Point & position, const unsigned color)
+//position des ennemis qu'on peut éventuellement prendre (et donc
+//position à éventuellement supprimer après capture
+inline std::vector<Point>  Board::getEnnemiesCorners(const Point & position, const unsigned color)
 {
-    std::vector<Cell> filledCorners = getFilledCorners(position);
-    std::vector<Cell> ennemies;
 
-    for(Cell & corner : filledCorners)
+    std::vector<Point> ennemies;
+
+    for(Point & corner : getFilledCorners(position))
     {
-        if (corner.getColor() != color)
+        if (getCellAt(corner).getColor() != color)
             ennemies.push_back(corner);
     }
 
@@ -112,22 +116,22 @@ inline Cell & Board::getCellAt(const Point & position) //const //const impossibl
 
 inline Cell & Board::getUpperLeft(const Point & position) //const impossible?
 {
-    return getCellAt(Point{position.getX() + 1,position.getY() - 1});
+    return getCellAt(position.getUpperLeft());
 }
 
 inline Cell & Board::getUpperRight(const Point & position) //const impossible?
 {
-    return getCellAt(Point{position.getX()+ 1,position.getY() + 1});
+    return getCellAt(position.getUpperRight());
 }
 
 inline Cell & Board::getLowerLeft(const Point & position) //const impossible?
 {
-    return getCellAt(Point{position.getX() - 1,position.getY() - 1});
+    return getCellAt(position.getLowerLeft());
 }
 
 inline Cell & Board::getLowerRight(const Point & position) //const impossible?
 {
-    return getCellAt(Point{position.getX() - 1,position.getY() + 1});
+    return getCellAt(position.getLowerRight());
 }
 
 #endif // BOARD_H

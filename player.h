@@ -22,12 +22,29 @@ private:
 
 
 public:
+    /**
+    * \brief Instancie un joueur de la couleur passée en paramètre
+    * et dont le nombre de dames est de 20 par défaut.
+    */
     Player(const unsigned, unsigned = 20);
 
+    /**
+    * \brief Retourne la couleur du joueur
+    * \return Une valeur héxadécimale désignant une couleur.
+    */
     const unsigned getColor() const;
+
+    /**
+    * \brief Retourne le nombre de dames restants au joueur.
+    * \return Une valeur entière nulle ou positive représentant le
+    * nombre de joueurs restants au joueur.
+    */
     unsigned getNumberOfMen() const;
 
-    unsigned removeMen(const unsigned);
+    /**
+    * \brief Supprime une ou plusieurs dames du  joueur.
+    */
+    void removeMen(const unsigned);
 };
 
 #endif // PLAYER_H

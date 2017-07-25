@@ -60,3 +60,17 @@ void Board::initMen()
 }
 
 
+std::vector<Cell>  Board::getAttackablePositions(const Point & position
+                                                  , const unsigned color)
+{
+    std::vector<Cell> attackable;
+
+    for(Point & ennemy : getEnnemiesCorners(position,color))
+        attackable.push_back(getCellAt(Point{ennemy.getX() + ennemy.getX(),
+                                       ennemy.getY()+ennemy.getY()}));
+
+    return attackable;
+
+
+
+}

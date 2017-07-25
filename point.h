@@ -3,6 +3,7 @@
 
 #include <ostream>
 #include <cmath>
+#include <vector>
 
 
 /**
@@ -67,6 +68,16 @@ public:
      */
     int getY() const;
 
+    Point  getUpperRight() const;
+
+    Point getLowerRight() const;
+
+    Point  getUpperLeft() const;
+
+    Point  getLowerLeft() const;
+
+    std::vector<Point> getCorners() const;
+
 
     /*!
      * \brief Permet de copier le contenu d'un point dans un
@@ -108,6 +119,37 @@ inline int Point::getX() const
 inline int Point::getY() const
 {
     return y;
+}
+
+inline Point Point::getUpperLeft() const
+{
+    return Point{x+1, y-1};
+}
+
+inline Point Point::getUpperRight() const
+{
+    return Point{x+1,y+1};
+}
+
+inline Point  Point::getLowerLeft() const
+{
+    return Point{x-1,y-1};
+}
+
+inline Point  Point::getLowerRight() const
+{
+    return Point{x-1,y+1};
+}
+
+inline std::vector<Point>  Point::getCorners() const
+{
+    std::vector<Point> corners;
+    corners.push_back(getLowerLeft());
+    corners.push_back(getLowerRight());
+    corners.push_back(getUpperLeft());
+    corners.push_back(getUpperRight());
+
+    return corners;
 }
 
 #endif // POINT_HPP
