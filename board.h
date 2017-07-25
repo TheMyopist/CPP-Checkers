@@ -32,10 +32,10 @@ public:
     
     //calcul des positions adjacentes à une cell (4 coins)
     std::vector<Cell>  getCorners(const Point &);
-    std::vector<Cell>  getEmptyCorners(const Point &);
+    std::vector<Point>  getEmptyCorners(const Point &);
     std::vector<Point>  getFilledCorners(const Point &);
-    std::vector<Point> getEnnemiesCorners(const Point &, const unsigned);
-    std::vector<Cell> getAttackablePositions(const Point &, const unsigned);
+
+
 
     Cell & getUpperLeft(const Point &);
     Cell & getUpperRight(const Point &);
@@ -59,21 +59,21 @@ inline std::vector<Cell> Board::getCorners(const Point & position)
 {
     std::vector<Cell> corners;
     
-    corners.at(0) = getUpperLeft(position);
-    corners.at(1) = getUpperRight(position);
-    corners.at(2) = getLowerLeft(position);
-    corners.at(3) = getLowerRight(position);
+    corners.at(0) = getLowerLeft(position);
+    corners.at(1) = getLowerRight(position);
+    corners.at(2) = getUpperLeft(position);
+    corners.at(3) = getUpperRight(position);
     
     return corners;
 }
 
-inline std::vector<Cell> Board::getEmptyCorners(const Point & position)
+inline std::vector<Point> Board::getEmptyCorners(const Point & position)
 {
-    std::vector<Cell> freeCorners;
+    std::vector<Point> freeCorners;
     
-    for(Cell & corner : getCorners(position))
+    for(Point & corner : position.getCorners())
     {
-        if (corner.isEmpty())
+        if (getCellAt(corner).isEmpty())
             freeCorners.push_back(corner);
     }
     
@@ -91,22 +91,6 @@ inline std::vector<Point> Board::getFilledCorners(const Point & position)
     }
     
     return filledCorners;
-}
-
-//position des ennemis qu'on peut éventuellement prendre (et donc
-//position à éventuellement supprimer après capture
-inline std::vector<Point>  Board::getEnnemiesCorners(const Point & position, const unsigned color)
-{
-
-    std::vector<Point> ennemies;
-
-    for(Point & corner : getFilledCorners(position))
-    {
-        if (getCellAt(corner).getColor() != color)
-            ennemies.push_back(corner);
-    }
-
-    return ennemies;
 }
 
 inline Cell & Board::getCellAt(const Point & position) //const //const impossible de convertir de const Cell en Cell &

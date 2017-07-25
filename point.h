@@ -79,27 +79,27 @@ public:
     std::vector<Point> getCorners() const;
 
 
-    /*!
-     * \brief Permet de copier le contenu d'un point dans un
-     * autre point.
-     * \return Le point courant modifié.
-     */
-    Point& operator=(const Point& other);
+//    /*!
+//     * \brief Permet de copier le contenu d'un point dans un
+//     * autre point.
+//     * \return Le point courant modifié.
+//     */
+//    Point& operator=(const Point& other);
 
-    /*!
-     * \brief Permet de savoir si deux points n'ont pas les
-     * mêmes coordonnées
-     * \return true si les deux points sont localisés
-     * à des endroits différents
-     */
-    bool operator!=(const Point &) const;
+//    /*!
+//     * \brief Permet de savoir si deux points n'ont pas les
+//     * mêmes coordonnées
+//     * \return true si les deux points sont localisés
+//     * à des endroits différents
+//     */
+//    bool operator!=(const Point &) const;
 
-    /*!
-     * \brief Permet de savoir si deux points ont des coordonnées
-     * identiques
-     * \return true si les points partangent les mêmes coordonées
-     */
-    bool operator==(const Point &) const;
+//    /*!
+//     * \brief Permet de savoir si deux points ont des coordonnées
+//     * identiques
+//     * \return true si les points partangent les mêmes coordonées
+//     */
+//    bool operator==(const Point &) const;
 
 
 };

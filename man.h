@@ -2,7 +2,6 @@
 #define MAN_H
 
 #include "color.h"
-#include "man.h"
 #include "point.h"
 
 /**
