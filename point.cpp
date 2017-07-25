@@ -4,7 +4,7 @@ Point::Point(const int x , const int y) : x{x} , y{y} {}
 
 Point::Point(const Point & p) : x{p.getX()}, y{p.getY()} {}
 
-void Point::move(const int direction)
+void Point::moveToDirection(int direction)
 {
     switch(direction)
     {
@@ -27,7 +27,7 @@ void Point::move(const int direction)
     }
 }
 
-int Point::getRelativeDirection(Point & from)
+int Point::getRelativeDirection(const Point & from)
 {
     int relativeDirection;
 
@@ -40,7 +40,6 @@ int Point::getRelativeDirection(Point & from)
     {
      if (y == from.y) {relativeDirection = NORTH;}
      else {relativeDirection = y > from.y ? NORTH_WEST : NORTH_EAST;}
-
     }
     else if (x < from.x)
     {

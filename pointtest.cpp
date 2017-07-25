@@ -19,21 +19,5 @@ TEST_CASE("Construction de points")
 
 TEST_CASE("Déplacement d'un point")
 {
-    Point a{0,0};
-    Point b{3,3};
-    Point c{23,4};
 
-
-    a.move(2,2);
-    b.move(-3,3);
-    c.move(-23,-4);
-
-    REQUIRE(a.getX() == 2);
-    REQUIRE(a.getY() == 2);
-
-    REQUIRE(b.getX() == 0);
-    REQUIRE(b.getY() == 6);
-
-    REQUIRE(c.getX() == 0);
-    REQUIRE(c.getY() == 0);
 }

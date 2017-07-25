@@ -56,19 +56,9 @@ public:
      */
     Point(const Point & point);
 
+    void moveToDirection(int direction);
 
-
-    /*!
-     * \brief move Déplace le point (modifie ses coordonnées) sur le
-     * plan cartésien en fonction des valeurs reçues en paramètres.
-     * \param dx Valeur à ajouter à la coordonnée X.
-     * \param dy Valeur à ajouter à la coordonnée Y.
-     */
-    void move(const int dx,const int dy);
-
-    void move(const int direction);
-
-    int getRelativeDirection(Point & from);
+    int getRelativeDirection(const Point &);
 
     /*!
      * \brief getX Retourne l'abscisse du point

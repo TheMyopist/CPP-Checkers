@@ -35,8 +35,8 @@ std::pair<Point,std::vector<Point>> Checkers::getMovablePositions(const Point & 
     return movablePositions;
 }
 
-std::vector<Point> Checkers::addMovablePositions(std::pair<Point, std::vector<Point> > movablePositions
-                                                 , const Point & corner
+std::vector<Point> Checkers::addMovablePositions(std::pair<Point, std::vector<Point> > & movablePositions
+                                                 , const Point &corner
                                                  , const unsigned color)
 {
     std::vector<Point> newMovablePositions{movablePositions.second};
@@ -45,26 +45,13 @@ std::vector<Point> Checkers::addMovablePositions(std::pair<Point, std::vector<Po
     if(positionToCheck.isEmpty()) //move possible
         newMovablePositions.push_back(corner);
     else if(isEnnemyPosition(corner,color))
-        //addpositionsuivante
+    {
+        Point p{corner};
+        p.moveToDirection(p.getRelativeDirection(movablePositions.first));
+        newMovablePositions.push_back(p);
+    }
 
     return newMovablePositions;
-
-}
-
-Point Checkers::getCapturablePosition(const Point & currentPosition
-                                      ,const Point & ennemyPosition)
-{
-    int currentX = currentPosition.getX();
-    int currentY = currentPosition.getY();
-    int ennemyX  = ennemyPosition.getX();
-    int ennemyY  = ennemyPosition.getY();
-
-    Point capturablePosition;
-
-    if(ennemyX == currentX - 1)
-
-
-
 }
 
 bool Checkers::isEnnemyPosition(const Point & position
@@ -73,34 +60,3 @@ bool Checkers::isEnnemyPosition(const Point & position
     return board.getCellAt(position).getColor() != color;
 }
 
-std::vector<Point>  Checkers::getEnnemiesCorners(const Point & position
-                                                 , const unsigned color)
-{
-
-    std::vector<Point> ennemies;
-
-    for(Point & corner : getBoard().getFilledCorners(position))
-    {
-        if (board.getCellAt(corner).getColor() != color)
-            ennemies.push_back(corner);
-    }
-
-    return ennemies;
-}
-
-std::vector<Point> Checkers::getAttackablePositions(const Point & position
-                                                  , const unsigned color)
-{
-    std::vector<Point> attackable;
-
-    for(Point & ennemy : getEnnemiesCorners(position,color))
-        attackable.push_back(Point{ennemy.getX() + ennemy.getX(),
-                                       ennemy.getY()+ennemy.getY()});
-
-    return attackable;
-}
-
-std::vector<Point> Checkers::getMovableCorners(const Point & position)
-{
-    return board.getEmptyCorners(position);
-}

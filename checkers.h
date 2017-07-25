@@ -37,13 +37,8 @@ public:
     //retourne la nouvelle position et les positions éventuelles
     //d'ennemis capturés
 
-
-
-   std::vector<Point> getEnnemiesCorners(const Point &, const unsigned);
-   std::vector<Point> getAttackablePositions(const Point &, const unsigned);
-   std::vector<Point> getMovableCorners(const Point &);
    std::pair<Point,std::vector<Point>> getMovablePositions(const Point &, const unsigned);
-   std::vector<Point> addMovablePositions(std::pair<Point,std::vector<Point>>, const Point &, const unsigned);
+   std::vector<Point> addMovablePositions(std::pair<Point,std::vector<Point>> &, const Point &, const unsigned);
 
    bool isEnnemyPosition(const Point &, const unsigned);
    Point getCapturablePosition(const Point &, const Point &);
