@@ -5,6 +5,16 @@
 #include <cmath>
 #include <vector>
 
+// DIRECTIONS
+#define CENTER     0
+#define NORTH      1
+#define NORTH_EAST 2
+#define NORTH_WEST 3
+#define SOUTH      4
+#define SOUTH_EAST 5
+#define SOUTH_WEST 6
+#define EAST       7
+#define WEST       8
 
 /**
  * @brief Cette classe Point définit un Point de coordonnées (x,y)
@@ -55,6 +65,10 @@ public:
      * \param dy Valeur à ajouter à la coordonnée Y.
      */
     void move(const int dx,const int dy);
+
+    void move(const int direction);
+
+    int getRelativeDirection(Point & from);
 
     /*!
      * \brief getX Retourne l'abscisse du point

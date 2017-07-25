@@ -23,22 +23,58 @@ void Checkers::removeMan(const Point position)
     board.getCellAt(position).clear();
 }
 
-//std::pair<Point,std::vector<Point>> Checkers::playablePositions(const Point & position,
-//                                                 const Man & man)
-//{
-////    std::pair<Point,std::vector<Point>> playablePositions;
+std::pair<Point,std::vector<Point>> Checkers::getMovablePositions(const Point & position, const unsigned color)
+{
+    std::pair<Point,std::vector<Point>> movablePositions;
+    movablePositions.first = position;
+    std::vector<Point> corners = board.getCorners(position);
 
-////    //positions capturables(pour capture)
-////    playablePositions
-////            .second = getAttackablePositions(position,man.getColor());
+    for(Point corner : corners)
+        addMovablePositions(movablePositions,corner,color);
 
-////    //positions vides (pour move)
-////    playablePositions.second.push_back(getMovableCorners(playablePositions));
+    return movablePositions;
+}
 
-////    return playablePositions;
-//}
+std::vector<Point> Checkers::addMovablePositions(std::pair<Point, std::vector<Point> > movablePositions
+                                                 , const Point & corner
+                                                 , const unsigned color)
+{
+    std::vector<Point> newMovablePositions{movablePositions.second};
+    Cell positionToCheck{board.getCellAt(corner)};
 
-std::vector<Point>  Checkers::getEnnemiesCorners(const Point & position, const unsigned color)
+    if(positionToCheck.isEmpty()) //move possible
+        newMovablePositions.push_back(corner);
+    else if(isEnnemyPosition(corner,color))
+        //addpositionsuivante
+
+    return newMovablePositions;
+
+}
+
+Point Checkers::getCapturablePosition(const Point & currentPosition
+                                      ,const Point & ennemyPosition)
+{
+    int currentX = currentPosition.getX();
+    int currentY = currentPosition.getY();
+    int ennemyX  = ennemyPosition.getX();
+    int ennemyY  = ennemyPosition.getY();
+
+    Point capturablePosition;
+
+    if(ennemyX == currentX - 1)
+
+
+
+}
+
+bool Checkers::isEnnemyPosition(const Point & position
+                                ,const unsigned color)
+{
+    return board.getCellAt(position).getColor() != color;
+}
+
+std::vector<Point>  Checkers::getEnnemiesCorners(const Point & position
+                                                 , const unsigned color)
 {
 
     std::vector<Point> ennemies;

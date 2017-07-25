@@ -36,18 +36,22 @@ public:
 
     //retourne la nouvelle position et les positions éventuelles
     //d'ennemis capturés
-   std::pair<Cell, std::vector<Cell>> getPlayablePositions(Point & position
-                                                       , const Man & man);
+
 
 
    std::vector<Point> getEnnemiesCorners(const Point &, const unsigned);
    std::vector<Point> getAttackablePositions(const Point &, const unsigned);
    std::vector<Point> getMovableCorners(const Point &);
+   std::pair<Point,std::vector<Point>> getMovablePositions(const Point &, const unsigned);
+   std::vector<Point> addMovablePositions(std::pair<Point,std::vector<Point>>, const Point &, const unsigned);
+
+   bool isEnnemyPosition(const Point &, const unsigned);
+   Point getCapturablePosition(const Point &, const Point &);
+
 
 
     //action des joueurs
-    std::pair<Point, std::vector<Point>> playablePositions(const Point &,
-              const Man &); //move,capture,walkoff,surrender selon input
+
     std::pair<Point,Point> move(const Point & position, const Man & man); //crown doit se faire auto
     void capture();
     void walkoff();

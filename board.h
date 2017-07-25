@@ -31,18 +31,9 @@ public:
     void initMen();
     
     //calcul des positions adjacentes à une cell (4 coins)
-    std::vector<Cell>  getCorners(const Point &);
+    std::vector<Point> getCorners(const Point &);
     std::vector<Point>  getEmptyCorners(const Point &);
     std::vector<Point>  getFilledCorners(const Point &);
-
-
-
-    Cell & getUpperLeft(const Point &);
-    Cell & getUpperRight(const Point &);
-    Cell & getLowerLeft(const Point &);
-    Cell & getLowerRight(const Point &);
-    
-    
 };
 
 inline unsigned int Board::getHeight() const
@@ -55,14 +46,14 @@ inline unsigned int Board::getWidth() const
     return width;
 }
 
-inline std::vector<Cell> Board::getCorners(const Point & position)
+inline std::vector<Point> Board::getCorners(const Point & position)
 {
-    std::vector<Cell> corners;
+    std::vector<Point> corners;
     
-    corners.at(0) = getLowerLeft(position);
-    corners.at(1) = getLowerRight(position);
-    corners.at(2) = getUpperLeft(position);
-    corners.at(3) = getUpperRight(position);
+    corners.at(0) = position.getLowerLeft();
+    corners.at(1) = position.getLowerRight();
+    corners.at(2) = position.getUpperLeft();
+    corners.at(3) = position.getUpperRight();
     
     return corners;
 }
@@ -97,25 +88,4 @@ inline Cell & Board::getCellAt(const Point & position) //const //const impossibl
 {
     return grid.at(position.getX()).at(position.getY());
 }
-
-inline Cell & Board::getUpperLeft(const Point & position) //const impossible?
-{
-    return getCellAt(position.getUpperLeft());
-}
-
-inline Cell & Board::getUpperRight(const Point & position) //const impossible?
-{
-    return getCellAt(position.getUpperRight());
-}
-
-inline Cell & Board::getLowerLeft(const Point & position) //const impossible?
-{
-    return getCellAt(position.getLowerLeft());
-}
-
-inline Cell & Board::getLowerRight(const Point & position) //const impossible?
-{
-    return getCellAt(position.getLowerRight());
-}
-
 #endif // BOARD_H
