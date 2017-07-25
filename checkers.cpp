@@ -23,22 +23,20 @@ void Checkers::removeMan(const Point position)
     board.getCellAt(position).clear();
 }
 
-std::pair<Point,std::vector<Point>> Checkers::playablePositions(const Point & position,
-                                                 const Man & man)
-{
-    std::pair<Point,std::vector<Point>> playablePositions;
+//std::pair<Point,std::vector<Point>> Checkers::playablePositions(const Point & position,
+//                                                 const Man & man)
+//{
+////    std::pair<Point,std::vector<Point>> playablePositions;
 
-    //positions capturables(pour capture)
-    playablePositions
-            .second = getAttackablePositions(position,man.getColor());
+////    //positions capturables(pour capture)
+////    playablePositions
+////            .second = getAttackablePositions(position,man.getColor());
 
-    //positions vides (pour move)
-    playablePositions.second.insert(playablePositions.second.end(),
-                                    getMovableCorners(position).begin(),
-                                    getMovableCorners(position).end());
+////    //positions vides (pour move)
+////    playablePositions.second.push_back(getMovableCorners(playablePositions));
 
-    return playablePositions;
-}
+////    return playablePositions;
+//}
 
 std::vector<Point>  Checkers::getEnnemiesCorners(const Point & position, const unsigned color)
 {
@@ -47,7 +45,7 @@ std::vector<Point>  Checkers::getEnnemiesCorners(const Point & position, const u
 
     for(Point & corner : getBoard().getFilledCorners(position))
     {
-        if (getBoard().getCellAt(corner).getColor() != color)
+        if (board.getCellAt(corner).getColor() != color)
             ennemies.push_back(corner);
     }
 
@@ -68,5 +66,5 @@ std::vector<Point> Checkers::getAttackablePositions(const Point & position
 
 std::vector<Point> Checkers::getMovableCorners(const Point & position)
 {
-    return getBoard().getEmptyCorners(position);
+    return board.getEmptyCorners(position);
 }
