@@ -9,9 +9,16 @@ Board::Board(const unsigned int height, const unsigned int width)
     initMen();
 }
 
-bool Board::isCellEmpty(Cell &cell) const
+bool Board::isCellEmpty(const Point & position) const
 {
-    return cell.isEmpty();
+    return isOnBoard(position) && getCellAt(position).isEmpty();
+}
+
+bool isOnBoard(Point & position) const
+{
+    // to do
+
+    return true;
 }
 
 void Board::colorize()
@@ -28,7 +35,6 @@ void Board::colorize()
     }
 }
 
-
 void Board::colorizeCell(const Point & position, const unsigned color)
 {
     getCellAt(position).colorize(color);
@@ -38,7 +44,6 @@ void Board::clearCell(const Point & position)
 {
     getCellAt(position).clear();
 }
-
 
 //cast to int for suppressing const/unsigned incompatibility warnings
 void Board::initMen()
@@ -57,4 +62,9 @@ void Board::initMen()
             }
         }
     }
+}
+
+Cell & Board::getCellAt(const Point & position) const //const impossible de convertir de const Cell en Cell &
+{
+    return grid.at(position.getX()).at(position.getY());
 }

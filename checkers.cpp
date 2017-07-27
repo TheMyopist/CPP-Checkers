@@ -23,35 +23,45 @@ void Checkers::removeMan(const Point position)
     board.getCellAt(position).clear();
 }
 
-std::pair<Point,std::vector<Point>> Checkers::getMovablePositions(const Point & position, const unsigned color)
+std::vector< std::pair<Point, std::vector<Point>> > Checkers::getMovablePositionsFrom(
+        const Point & position,
+        const unsigned color)
 {
-    std::pair<Point,std::vector<Point>> movablePositions;
-    movablePositions.first = position;
-    std::vector<Point> corners = board.getCorners(position);
+    std::vector< std::pair<Point, std::vector<Point>> > movablePositions;
+    std::vector<Point> corners = position.getCorners();
 
     for(Point & corner : corners)
-        addMovablePositions(movablePositions,corner,color);
+        addMovablePositions(movablePositions, position, corner, color);
 
     return movablePositions;
 }
 
-std::vector<Point> Checkers::addMovablePositions(std::pair<Point, std::vector<Point> > & movablePositions
-                                                 , const Point &corner
-                                                 , const unsigned color)
+void Checkers::addMovablePositions(
+        std::vector< std::pair<Point, std::vector<Point>> > & movablePositions,
+        const Point & position,
+        const Point & corner,
+        const unsigned color)
 {
-    std::vector<Point> newMovablePositions{movablePositions.second};
-    Cell positionToCheck{board.getCellAt(corner)};
-
-    if(positionToCheck.isEmpty()) //move possible
-        newMovablePositions.push_back(corner);
-    else if(isEnnemyPosition(corner,color)) //capture
+    if (board.isOnBoard(corner))
     {
-        Point positionToCapture{corner};
-        positionToCapture.moveToDirection(positionToCapture.getRelativeDirection(movablePositions.first));
-        newMovablePositions.push_back(positionToCapture);
-    }
+        std::vector<Point> captured;
 
-    return newMovablePositions;
+        if (board.isCellEmpty(corner)) //move possible
+            movablePositions.push_back(std::pair<Point, std::vector<Point>>(corner, captured));
+        else if (isEnnemyPosition(corner, color)) //capture
+        {
+            Point destination = corner.newRelativePoint
+                    (corner.getRelativeDirection(position));
+
+            if (isEnnemyPosition(corner, color)
+                    && board.isOnBoard(destination)
+                    && board.isCellEmpty(destination))
+            {
+                captured.push_back(corner);
+                movablePositions.push_back(std::pair<Point, std::vector<Point>>(destination, captured));
+            }
+        }
+    }
 }
 
 bool Checkers::isEnnemyPosition(const Point & position

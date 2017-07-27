@@ -27,7 +27,7 @@ void Point::moveToDirection(int direction)
     }
 }
 
-int Point::getRelativeDirection(const Point & from)
+int Point::getRelativeDirection(const Point & from) const
 {
     int relativeDirection;
 
@@ -47,4 +47,38 @@ int Point::getRelativeDirection(const Point & from)
       else {relativeDirection = y > from.y ? SOUTH_WEST : SOUTH_EAST;}
     }
     return relativeDirection;
+}
+
+void Point::moveFurtherAwayFrom(const Point & from, int times)
+{
+    int direction = getRelativeDirection(from);
+
+    for (int i=0; i<times; i++)
+        moveToDirection(direction);
+}
+
+std::vector<Point> Point::getCorners()
+{
+    std::vector<int> directions{SOUTH_WEST,SOUTH_EAST,NORTH_EAST,NORTH_WEST};
+
+    return getRelativePositions(directions);
+}
+
+std::vector<Point> Point::getRelativePositions(std::vector<int> & directions)
+{
+    std::vector<Point> positions;
+
+    for(int direction : directions)
+        positions.push_back(newRelativePoint(direction));
+
+    return positions;
+}
+
+Point Point::newRelativePoint(int direction)
+{
+    Point thisCpy{*this};
+
+    thisCpy.moveToDirection(direction);
+
+    return thisCpy;
 }

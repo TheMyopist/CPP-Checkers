@@ -37,15 +37,22 @@ public:
     //retourne la nouvelle position et les positions éventuelles
     //d'ennemis capturés
 
-   std::pair<Point,std::vector<Point>> getMovablePositions(const Point &, const unsigned);
-   std::vector<Point> addMovablePositions(std::pair<Point,std::vector<Point>> &, const Point &, const unsigned);
+   std::vector< std::pair<Point, std::vector<Point>> > Checkers::getMovablePositionsFrom(
+           const Point & position,
+           const unsigned color);
+
+   void Checkers::addMovablePositions(
+           std::vector< std::pair<Point, std::vector<Point>> > & movablePositions,
+           const Point & position,
+           const Point &corner,
+           const unsigned color);
 
    bool isEnnemyPosition(const Point &, const unsigned);
 
     //action des joueurs
 
-    std::pair<Point,Point> move(const Point & position, const Man & man); //crown doit se faire auto
-    void capture();
+    void move(const Point &, const Point &); //crown doit se faire auto
+    void capture(const Point &, const Point &);
     void walkoff();
     void surrender();
 

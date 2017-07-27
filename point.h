@@ -58,7 +58,14 @@ public:
 
     void moveToDirection(int direction);
 
-    int getRelativeDirection(const Point &);
+    int getRelativeDirection(const Point &) const;
+
+    std::vector<Point> Point::getRelativePositions(std::vector<int> & directions);
+
+    std::vector<Point> Point::getCorners();
+
+    Point Point::newRelativePoint(int destination);
+
 
     /*!
      * \brief getX Retourne l'abscisse du point
@@ -82,6 +89,9 @@ public:
 
     std::vector<Point> getCorners() const;
 
+    void Point::moveFurtherAwayFrom(const Point & from, int times);
+
+    Point Point::newPointFrom(Point & from, int destination);
 
 //    /*!
 //     * \brief Permet de copier le contenu d'un point dans un
