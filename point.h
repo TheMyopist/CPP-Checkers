@@ -58,13 +58,13 @@ public:
 
     void moveToDirection(int direction);
 
-    int getRelativeDirection(const Point &) const;
+    int getRelativeDirection(const Point &);
 
     std::vector<Point> Point::getRelativePositions(std::vector<int> & directions);
 
     std::vector<Point> Point::getCorners();
 
-    Point Point::newRelativePoint(int destination);
+    Point Point::newRelativePoint(const int destination);
 
 
     /*!

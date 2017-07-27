@@ -39,7 +39,7 @@ std::vector< std::pair<Point, std::vector<Point>> > Checkers::getMovablePosition
 void Checkers::addMovablePositions(
         std::vector< std::pair<Point, std::vector<Point>> > & movablePositions,
         const Point & position,
-        const Point & corner,
+        Point & corner,
         const unsigned color)
 {
     if (board.isOnBoard(corner))
@@ -50,8 +50,8 @@ void Checkers::addMovablePositions(
             movablePositions.push_back(std::pair<Point, std::vector<Point>>(corner, captured));
         else if (isEnnemyPosition(corner, color)) //capture
         {
-            Point destination = corner.newRelativePoint
-                    (corner.getRelativeDirection(position));
+            Point destination{corner.newRelativePoint
+                    (corner.getRelativeDirection(position))};
 
             if (isEnnemyPosition(corner, color)
                     && board.isOnBoard(destination)

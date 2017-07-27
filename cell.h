@@ -44,7 +44,7 @@ public:
     /**
     * \brief Instancie une case par copie d'une autre case.
     */
-    Cell (const Cell & cell);
+    Cell(const Cell &cell);
 
     /**
     * \brief Retourne la couleur de la case
@@ -58,7 +58,7 @@ public:
     * \return Une référence vers l'adresse de la dame qui occupe la
     * case.
     */
-    Man & getMan();
+    Man &getMan();
 
     /**
     * \brief Nettoie la case en remettant son attribut empty à true

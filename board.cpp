@@ -9,12 +9,12 @@ Board::Board(const unsigned int height, const unsigned int width)
     initMen();
 }
 
-bool Board::isCellEmpty(const Point & position) const
+bool Board::isCellEmpty(const Point & position)
 {
-    return isOnBoard(position) && getCellAt(position).isEmpty();
+    return getCellAt(position).isEmpty() && isOnBoard(position);
 }
 
-bool isOnBoard(Point & position) const
+bool Board::isOnBoard(const Point & position) const
 {
     // to do
 
@@ -64,7 +64,7 @@ void Board::initMen()
     }
 }
 
-Cell & Board::getCellAt(const Point & position) const //const impossible de convertir de const Cell en Cell &
+Cell &Board::getCellAt(const Point & position) //const impossible de convertir de const Cell en Cell &
 {
     return grid.at(position.getX()).at(position.getY());
 }

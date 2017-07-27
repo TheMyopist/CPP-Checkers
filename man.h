@@ -36,6 +36,8 @@ public:
     */
     Man(const unsigned = BLACK);
 
+    Man(const Man &);
+
     /**
     * \brief Retourne la couleur de la dame
     * \return La valeur hexadécimale convertie en valeur décimale

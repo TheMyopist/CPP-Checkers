@@ -27,7 +27,7 @@ void Point::moveToDirection(int direction)
     }
 }
 
-int Point::getRelativeDirection(const Point & from) const
+int Point::getRelativeDirection(const Point & from)
 {
     int relativeDirection;
 
@@ -74,7 +74,7 @@ std::vector<Point> Point::getRelativePositions(std::vector<int> & directions)
     return positions;
 }
 
-Point Point::newRelativePoint(int direction)
+Point Point::newRelativePoint(const int direction)
 {
     Point thisCpy{*this};
 

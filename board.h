@@ -25,7 +25,7 @@ public:
     unsigned int getHeight() const;
     unsigned int getWidth() const;
     Cell & getCellAt(const Point &);
-    bool isCellEmpty(const Point & position) const;
+    bool isCellEmpty(const Point & position);
     bool isOnBoard(const Point & position) const;
     void clearCell(const Point &);
     void colorize();

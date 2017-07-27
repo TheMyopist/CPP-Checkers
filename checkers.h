@@ -41,10 +41,9 @@ public:
            const Point & position,
            const unsigned color);
 
-   void Checkers::addMovablePositions(
-           std::vector< std::pair<Point, std::vector<Point>> > & movablePositions,
+   void Checkers::addMovablePositions(std::vector< std::pair<Point, std::vector<Point>> > & movablePositions,
            const Point & position,
-           const Point &corner,
+           Point &corner,
            const unsigned color);
 
    bool isEnnemyPosition(const Point &, const unsigned);
