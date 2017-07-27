@@ -29,7 +29,7 @@ std::pair<Point,std::vector<Point>> Checkers::getMovablePositions(const Point & 
     movablePositions.first = position;
     std::vector<Point> corners = board.getCorners(position);
 
-    for(Point corner : corners)
+    for(Point & corner : corners)
         addMovablePositions(movablePositions,corner,color);
 
     return movablePositions;

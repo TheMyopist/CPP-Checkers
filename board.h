@@ -32,8 +32,6 @@ public:
     
     //calcul des positions adjacentes à une cell (4 coins)
     std::vector<Point> getCorners(const Point &);
-    std::vector<Point>  getEmptyCorners(const Point &);
-    std::vector<Point>  getFilledCorners(const Point &);
 };
 
 inline unsigned int Board::getHeight() const
@@ -62,32 +60,6 @@ inline std::vector<Point> Board::getCorners(const Point & position)
             corners.push_back(corner);
      }
     return corners;
-}
-
-inline std::vector<Point> Board::getEmptyCorners(const Point & position)
-{
-    std::vector<Point> freeCorners;
-    
-    for(Point & corner : position.getCorners())
-    {
-        if (getCellAt(corner).isEmpty())
-            freeCorners.push_back(corner);
-    }
-    
-    return freeCorners;
-}
-
-inline std::vector<Point> Board::getFilledCorners(const Point & position)
-{
-    std::vector<Point> filledCorners;
-    
-    for(Point & corner : position.getCorners())
-    {
-        if (!getCellAt(corner).isEmpty())
-            filledCorners.push_back(corner);
-    }
-    
-    return filledCorners;
 }
 
 inline Cell & Board::getCellAt(const Point & position) //const //const impossible de convertir de const Cell en Cell &
