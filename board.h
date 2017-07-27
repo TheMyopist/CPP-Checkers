@@ -48,13 +48,19 @@ inline unsigned int Board::getWidth() const
 
 inline std::vector<Point> Board::getCorners(const Point & position)
 {
+    Point corner{position};
+    int x; int y;
     std::vector<Point> corners;
-    
-    corners.at(0) = position.getLowerLeft();
-    corners.at(1) = position.getLowerRight();
-    corners.at(2) = position.getUpperLeft();
-    corners.at(3) = position.getUpperRight();
-    
+    std::vector<int> directions{SOUTH_WEST,SOUTH_EAST,NORTH_EAST,NORTH_WEST};
+
+    for(int direction : directions)
+    {
+        corner.moveToDirection(direction);
+        x = corner.getX();
+        y = corner.getY();
+        if(((x < (int)height) || (x >= 0) ) || ((y < (int)width) || (y >= 0)))
+            corners.push_back(corner);
+     }
     return corners;
 }
 

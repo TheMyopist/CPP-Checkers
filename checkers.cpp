@@ -44,11 +44,11 @@ std::vector<Point> Checkers::addMovablePositions(std::pair<Point, std::vector<Po
 
     if(positionToCheck.isEmpty()) //move possible
         newMovablePositions.push_back(corner);
-    else if(isEnnemyPosition(corner,color))
+    else if(isEnnemyPosition(corner,color)) //capture
     {
-        Point p{corner};
-        p.moveToDirection(p.getRelativeDirection(movablePositions.first));
-        newMovablePositions.push_back(p);
+        Point positionToCapture{corner};
+        positionToCapture.moveToDirection(positionToCapture.getRelativeDirection(movablePositions.first));
+        newMovablePositions.push_back(positionToCapture);
     }
 
     return newMovablePositions;

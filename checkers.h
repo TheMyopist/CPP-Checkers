@@ -41,9 +41,6 @@ public:
    std::vector<Point> addMovablePositions(std::pair<Point,std::vector<Point>> &, const Point &, const unsigned);
 
    bool isEnnemyPosition(const Point &, const unsigned);
-   Point getCapturablePosition(const Point &, const Point &);
-
-
 
     //action des joueurs
 
