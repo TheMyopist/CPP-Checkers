@@ -16,9 +16,8 @@ bool Board::isCellEmpty(const Point & position)
 
 bool Board::isOnBoard(const Point & position) const
 {
-    // to do
-
-    return true;
+    return (position.getX() < (int)height && position.getX() >= 0)
+            && (position.getY() < (int)width && position.getY() >= 0);
 }
 
 void Board::colorize()

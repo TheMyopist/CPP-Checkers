@@ -1,4 +1,5 @@
 #include "checkers.h"
+#include <algorithm>
 
 Checkers::Checkers(const bool isMultiplayer) : turn{0},
     gameOver{false}, board{Board()}
@@ -44,16 +45,16 @@ void Checkers::addMovablePositions(
 {
     if (board.isOnBoard(corner))
     {
-        std::vector<Point> captured;
+        std::vector<Point> captured; //les positions capturées à nettoyer
 
-        if (board.isCellEmpty(corner)) //move possible
+        if (board.isCellEmpty(corner) && captured.empty()) //move possible et autorisé car on a pas encore capturé
             movablePositions.push_back(std::pair<Point, std::vector<Point>>(corner, captured));
         else if (isEnnemyPosition(corner, color)) //capture
         {
             Point destination{corner.newRelativePoint
                     (corner.getRelativeDirection(position))};
 
-            if (isEnnemyPosition(corner, color)
+            if (isEnnemyPosition(corner, color) //enlever ce test
                     && board.isOnBoard(destination)
                     && board.isCellEmpty(destination))
             {
@@ -62,6 +63,21 @@ void Checkers::addMovablePositions(
             }
         }
     }
+}
+
+std::vector<Point> Checkers::getCornersFromDestination(Point & from
+                                                       ,Point & destination)
+{
+    std::vector<Point> corners;
+    std::vector<int> directions{NORTH_EAST,NORTH_WEST,SOUTH_EAST,SOUTH_WEST};
+    int cornerFrom = destination.getRelativeDirection(from);
+
+    directions.erase(std::remove(directions.begin(), directions.end(), cornerFrom), directions.end());
+
+    corners = destination.getRelativePositions(directions);
+
+    return corners;
+
 }
 
 bool Checkers::isEnnemyPosition(const Point & position

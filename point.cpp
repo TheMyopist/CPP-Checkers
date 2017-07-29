@@ -64,7 +64,7 @@ std::vector<Point> Point::getCorners()
     return getRelativePositions(directions);
 }
 
-std::vector<Point> Point::getRelativePositions(std::vector<int> & directions)
+std::vector<Point> Point::getRelativePositions(std::vector<int> & directions) const
 {
     std::vector<Point> positions;
 
@@ -74,7 +74,7 @@ std::vector<Point> Point::getRelativePositions(std::vector<int> & directions)
     return positions;
 }
 
-Point Point::newRelativePoint(const int direction)
+Point Point::newRelativePoint(const int direction) const
 {
     Point thisCpy{*this};
 

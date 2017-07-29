@@ -58,7 +58,7 @@ public:
     * \return Une référence vers l'adresse de la dame qui occupe la
     * case.
     */
-    Man &getMan();
+    Man & getMan();
 
     /**
     * \brief Nettoie la case en remettant son attribut empty à true

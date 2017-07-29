@@ -60,11 +60,11 @@ public:
 
     int getRelativeDirection(const Point &);
 
-    std::vector<Point> Point::getRelativePositions(std::vector<int> & directions);
+    std::vector<Point> getRelativePositions(std::vector<int> & directions) const;
 
-    std::vector<Point> Point::getCorners();
+    std::vector<Point> getCorners();
 
-    Point Point::newRelativePoint(const int destination);
+    Point newRelativePoint(const int destination) const;
 
 
     /*!
@@ -78,14 +78,6 @@ public:
      * \return l'ordonnée du point
      */
     int getY() const;
-
-    Point  getUpperRight() const;
-
-    Point getLowerRight() const;
-
-    Point  getUpperLeft() const;
-
-    Point  getLowerLeft() const;
 
     std::vector<Point> getCorners() const;
 
@@ -135,33 +127,13 @@ inline int Point::getY() const
     return y;
 }
 
-inline Point Point::getUpperLeft() const
+inline std::vector<Point> Point::getCorners() const
 {
-    return Point{x+1, y-1};
-}
+    std::vector<int> directions{SOUTH_EAST,SOUTH_WEST
+                ,NORTH_EAST,NORTH_WEST};
+    std::vector<Point> corners =
+            getRelativePositions(directions);
 
-inline Point Point::getUpperRight() const
-{
-    return Point{x+1,y+1};
-}
-
-inline Point  Point::getLowerLeft() const
-{
-    return Point{x-1,y-1};
-}
-
-inline Point  Point::getLowerRight() const
-{
-    return Point{x-1,y+1};
-}
-
-inline std::vector<Point>  Point::getCorners() const
-{
-    std::vector<Point> corners;
-    corners.push_back(getLowerLeft());
-    corners.push_back(getLowerRight());
-    corners.push_back(getUpperLeft());
-    corners.push_back(getUpperRight());
 
     return corners;
 }

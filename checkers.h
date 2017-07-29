@@ -5,6 +5,7 @@
 #include "player.h"
 #include "iaplayer.h"
 #include "man.h"
+#include <algorithm>
 
 
 
@@ -37,14 +38,16 @@ public:
     //retourne la nouvelle position et les positions éventuelles
     //d'ennemis capturés
 
-   std::vector< std::pair<Point, std::vector<Point>> > Checkers::getMovablePositionsFrom(
+   std::vector< std::pair<Point, std::vector<Point>> > getMovablePositionsFrom(
            const Point & position,
            const unsigned color);
 
-   void Checkers::addMovablePositions(std::vector< std::pair<Point, std::vector<Point>> > & movablePositions,
+   void addMovablePositions(std::vector< std::pair<Point, std::vector<Point>> > & movablePositions,
            const Point & position,
            Point &corner,
            const unsigned color);
+
+   std::vector<Point> getCornersFromDestination(Point &, Point &);
 
    bool isEnnemyPosition(const Point &, const unsigned);
 
