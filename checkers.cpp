@@ -24,6 +24,20 @@ void Checkers::removeMan(const Point position)
     board.getCellAt(position).clear();
 }
 
+void Checkers::addMan(const Point & position,const Man & man)
+{
+    board.getCellAt(position).addMan(man);
+}
+
+void Checkers::play(std::pair<Point, std::vector<Point> > & pairToPlay)
+{
+        removeMan(currentPiecePosition);
+        addMan(pairToPlay.first,currentPiece);
+
+        for (Point & capturedEnemyPosition : pairToPlay.second)
+                    removeMan(capturedEnemyPosition);
+}
+
 std::vector< std::pair<Point, std::vector<Point>> > Checkers::getMovablePositionsFrom(
         const Point & position)
 {
@@ -62,12 +76,12 @@ void Checkers::addMovablePositions(
             movablePositions.push_back(
                     std::pair<Point, std::vector<Point>>(corner, capturedOnPath));
         }
-        else if (isEnnemyPosition(corner, currentPieceColor))
+        else if (isEnnemyPosition(corner, currentPiece.getColor()))
         {
             Point destination{corner.newRelativePoint
                     (corner.getRelativeDirection(position))};
 
-            if (isEnnemyPosition(corner, this->currentPieceColor)
+            if (isEnnemyPosition(corner,currentPiece.getColor())
                     && board.isOnBoard(destination)
                     && board.isCellEmpty(destination))
             {

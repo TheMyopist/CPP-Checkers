@@ -15,7 +15,9 @@ private:
 
     Board board;
     std::vector<Player> players;
-    int currentPieceColor;
+    Man currentPiece;
+    //int currentPieceColor; //dans player?
+    Point currentPiecePosition; //déplacer dans player?
     unsigned turn;
     bool gameOver;
     bool multiplayer; //par défaut on joue contre IA
@@ -30,6 +32,8 @@ public:
     std::vector<Player> & getPlayers() const;
     const unsigned getTurn() const; //get turnt lol
     const bool isMultiplayer() const;
+
+    void play(std::pair<Point, std::vector<Point>> &);
 
     //tours et fin de la partie
     void nextTurn();
@@ -56,14 +60,10 @@ public:
 
    bool isEnnemyPosition(const Point &, const unsigned);
 
-    //action des joueurs
-
-    void move(const Point &, const Point &); //crown doit se faire auto
-    void capture(const Point &, const Point &);
-    void walkoff();
     void surrender();
 
     //conséquence action
+    void addMan(const Point & position, const Man & man);
     void removeMan(const Point);
 
 };

@@ -16,8 +16,8 @@ void Cell::colorize(const unsigned newColor)
     color = newColor;
 }
 
-void Cell::addMan(const unsigned color)
+void Cell::addMan(const Man &newMan)
 {
     empty = false;
-    man = Man{color};
+    man = newMan;
 }

@@ -82,7 +82,7 @@ public:
     * \brief Ajoute une dame de la couleur passée en paramètre sur
     * la case.
     */
-    void addMan(const unsigned);
+    void addMan(const Man &man);
 
 
 
