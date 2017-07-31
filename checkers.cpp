@@ -32,11 +32,15 @@ void Checkers::addMan(const Point & position,const Man & man)
 
 void Checkers::play(std::pair<Point, std::vector<Point> > & pairToPlay)
 {
-        removeMan(currentPiecePosition);
-        addMan(pairToPlay.first,currentPiece);
+    removeMan(currentPiecePosition);
 
-        for (Point & capturedEnemyPosition : pairToPlay.second)
-                    removeMan(capturedEnemyPosition);
+    if((isOnCrownLine(pairToPlay.first)) && (!currentPiece.isKing()))
+        currentPiece.crown();
+
+    addMan(pairToPlay.first,currentPiece);
+
+    for (Point & capturedEnemyPosition : pairToPlay.second)
+        removeMan(capturedEnemyPosition);
 }
 
 std::vector< std::pair<Point, std::vector<Point>> > Checkers::getMovablePositionsFrom(
@@ -116,3 +120,8 @@ bool Checkers::isEnnemyPosition(const Point & position,
     return board.getCellAt(position).getMan().getColor() != color;
 }
 
+bool Checkers::isOnCrownLine(const Point & position) const
+{
+    return ((currentPiece.getColor()) == (WHITE && position.getX() == 0))
+           || ((currentPiece.getColor() == BLACK) && (position.getX() == board.getHeight() - 1));
+}

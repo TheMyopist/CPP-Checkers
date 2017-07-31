@@ -26,7 +26,7 @@ private:
     * \brief isKing, booléen déterminant si la dame a été promue reine
     * durant la partie. Si false, simple dame. Si true, reine.
     */
-    bool isKing;
+    bool king;
 
 public:
 
@@ -50,7 +50,7 @@ public:
     * \return True si la dame a été promue reine (crowned), false
     * dans le cas contraire.
     */
-    bool getIsKing() const;
+    bool isKing() const;
 
     /**
     * \brief Promu une dame au statut de reine.
@@ -64,9 +64,9 @@ inline const unsigned Man::getColor() const
 }
 
 
-inline bool Man::getIsKing() const
+inline bool Man::isKing() const
 {
-    return isKing;
+    return king;
 }
 
 #endif // MAN_H

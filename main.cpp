@@ -10,14 +10,14 @@ int main(int argc, char *argv[])
 {
     Checkers checkers{};
     Man currentPiece{};
-    Point currentPiecePosition{7,5};
+    Point currentPiecePosition{4,4};
 
     checkers.setCurrentPiece(currentPiece, currentPiecePosition);
     checkers.addMan(currentPiecePosition,currentPiece);
-    checkers.addMan(Point{6,6},Man{WHITE});
-//    checkers.addMan(Point{6,6},Man{WHITE});
-//    checkers.addMan(Point{4,4},Man{WHITE});
-//    checkers.addMan(Point{2,4},Man{BLACK});
+    checkers.addMan(Point{3,3},Man{WHITE});
+    checkers.addMan(Point{5,5},Man{WHITE});
+    checkers.addMan(Point{7,5},Man{WHITE});
+    checkers.addMan(Point{7,7},Man{WHITE});
 //    checkers.addMan(Point{2,2},Man{WHITE});
 
     std::vector<std::pair<Point, std::vector<Point>>> movablePositions =  checkers.getMovablePositionsFrom(currentPiecePosition);

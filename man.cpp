@@ -1,12 +1,12 @@
 #include "man.h"
 
 Man::Man(const unsigned color) :
-    color{color}, isKing{false} {}
+    color{color}, king{false} {}
 
 Man::Man(const Man &man) : color{man.getColor()}
-  , isKing{man.getIsKing()}{}
+  , king{man.king}{}
 
 void Man::crown()
 {
-    isKing = true;
+    king = true;
 }

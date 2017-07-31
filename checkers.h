@@ -35,6 +35,7 @@ public:
     const bool isMultiplayer() const;
 
     void play(std::pair<Point, std::vector<Point>> &);
+    bool isOnCrownLine(const Point &) const;
 
     //tours et fin de la partie
     void nextTurn();
