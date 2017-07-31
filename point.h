@@ -105,17 +105,10 @@ public:
 //     * identiques
 //     * \return true si les points partangent les mêmes coordonées
 //     */
-//    bool operator==(const Point &) const;
+bool operator==(const Point &) const;
 
 
 };
-/*!
- * \brief Redefinition de l'operateur << servant à produire un
- * affichage formaté
- * \return Une chaîne formatée représentant de manière
- * textuelle le point donnée en paramètre
- */
-std::ostream & operator<<(std::ostream &, const Point &);
 
 inline int Point::getX() const
 {
@@ -131,6 +124,7 @@ inline std::vector<Point> Point::getCorners() const
 {
     std::vector<int> directions{SOUTH_EAST,SOUTH_WEST
                 ,NORTH_EAST,NORTH_WEST};
+
     std::vector<Point> corners =
             getRelativePositions(directions);
 

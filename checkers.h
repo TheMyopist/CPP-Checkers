@@ -15,6 +15,7 @@ private:
 
     Board board;
     std::vector<Player> players;
+    int currentPieceColor;
     unsigned turn;
     bool gameOver;
     bool multiplayer; //par défaut on joue contre IA
@@ -39,13 +40,17 @@ public:
     //d'ennemis capturés
 
    std::vector< std::pair<Point, std::vector<Point>> > getMovablePositionsFrom(
-           const Point & position,
-           const unsigned color);
+            const Point &);
+   void getMovablePositionsFrom(
+           const Point &,
+           std::vector< std::pair<Point, std::vector<Point>> > &,
+           std::vector<Point>);
 
-   void addMovablePositions(std::vector< std::pair<Point, std::vector<Point>> > & movablePositions,
-           const Point & position,
-           Point &corner,
-           const unsigned color);
+   void addMovablePositions(
+           std::vector< std::pair<Point, std::vector<Point>> > &,
+           const Point &,
+           Point &,
+           std::vector<Point>);
 
    std::vector<Point> getCornersFromDestination(Point &, Point &);
 
