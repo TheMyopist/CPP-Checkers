@@ -36,6 +36,7 @@ public:
 
     void play(std::pair<Point, std::vector<Point>> &);
     bool isOnCrownLine(const Point &) const;
+    bool isInTheRightDirection(const Point & position) const;
 
     //tours et fin de la partie
     void nextTurn();

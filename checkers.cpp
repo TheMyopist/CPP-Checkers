@@ -76,7 +76,7 @@ void Checkers::addMovablePositions(
 {
     if (board.isOnBoard(corner))
     {
-        if (board.isCellEmpty(corner) && capturedOnPath.empty())
+        if (board.isCellEmpty(corner) && capturedOnPath.empty() && isInTheRightDirection(corner))
         {
             movablePositions.push_back(
                     std::pair<Point, std::vector<Point>>(corner, capturedOnPath));
@@ -124,4 +124,38 @@ bool Checkers::isOnCrownLine(const Point & position) const
 {
     return ((currentPiece.getColor()) == (WHITE && position.getX() == 0))
            || ((currentPiece.getColor() == BLACK) && (position.getX() == board.getHeight() - 1));
+}
+
+bool Checkers::isInTheRightDirection(const Point & position) const
+{
+    int color = currentPiece.getColor();
+
+    return ((color == WHITE) && (position.getX() < currentPiecePosition.getX()))
+           || ((color == BLACK) && (position.getX() > currentPiecePosition.getX()));
+}
+
+std::vector<std::pair<Point, std::vector<Point>>> trimBiggestPaths
+(std::vector<std::pair<Point, std::vector<Point>>> capturedPositions)
+{
+    std::vector<std::pair<Point, std::vector<Point>>> biggestPaths;
+    size_t biggestSize = 0;
+    size_t vectorSize = 0;
+
+
+    for(std::pair<Point, std::vector<Point>> capturedPosition : capturedPositions )
+    {
+        vectorSize = capturedPosition.second.size();
+
+        if(vectorSize > biggestSize)
+            biggestSize = vectorSize;
+    }
+
+    for(std::pair<Point, std::vector<Point>> capturedPosition : capturedPositions )
+    {
+        vectorSize = capturedPosition.second.size();
+        if(vectorSize == biggestSize)
+            biggestPaths.push_back(capturedPosition);
+    }
+
+    return biggestPaths;
 }
