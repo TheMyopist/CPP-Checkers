@@ -27,6 +27,7 @@ public:
     Checkers(const bool = false); //par défaut on joue contre l'IA, voir si const ici ok
 
     void initPlayers(const bool);
+    void setCurrentPiece(Man &,Point &);
 
     Board & getBoard(); //le get modifie pas le board, mais le board peut être modifié par une autre fonction qui appellele get
     std::vector<Player> & getPlayers() const;
@@ -71,6 +72,13 @@ public:
 inline Board & Checkers::getBoard()
 {
     return board;
+}
+
+inline void Checkers::setCurrentPiece(Man & newCurrentPiece
+                                      , Point & newCurrentPosition)
+{
+    currentPiece = newCurrentPiece;
+    currentPiecePosition = newCurrentPosition;
 }
 
 #endif // CHECKERS_H

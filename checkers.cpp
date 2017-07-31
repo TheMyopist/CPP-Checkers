@@ -1,5 +1,6 @@
 #include "checkers.h"
 #include <algorithm>
+#include <iostream>
 
 Checkers::Checkers(const bool isMultiplayer) : turn{0},
     gameOver{false}, board{Board()}
@@ -109,9 +110,9 @@ std::vector<Point> Checkers::getCornersFromDestination(Point & from
     return corners;
 }
 
-bool Checkers::isEnnemyPosition(const Point & position
-                                ,const unsigned color)
+bool Checkers::isEnnemyPosition(const Point & position,
+                                const unsigned color)
 {
-    return board.getCellAt(position).getColor() != color;
+    return board.getCellAt(position).getMan().getColor() != color;
 }
 

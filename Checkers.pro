@@ -13,7 +13,8 @@ SOURCES += main.cpp \
     man.cpp \
     checkers.cpp \
     player.cpp \
-    iaplayer.cpp
+    iaplayer.cpp \
+    checkerstest.cpp
 
 HEADERS += \
     point.h \
