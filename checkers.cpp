@@ -3,7 +3,7 @@
 #include <iostream>
 
 Checkers::Checkers(const bool isMultiplayer) : turn{0},
-    gameOver{false}, board{Board()}
+    gameOver{false}, board{Board()}, currentPlayer{(unsigned)rand() % 1}
 {
     initPlayers(isMultiplayer);
 }
@@ -41,6 +41,8 @@ void Checkers::play(std::pair<Point, std::vector<Point> > & pairToPlay)
 
     for (Point & capturedEnemyPosition : pairToPlay.second)
         removeMan(capturedEnemyPosition);
+
+    currentPlayer = ++currentPlayer % 2;
 }
 
 std::vector< std::pair<Point, std::vector<Point>> > Checkers::getMovablePositionsFrom(

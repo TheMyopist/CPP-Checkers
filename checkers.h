@@ -15,6 +15,7 @@ private:
 
     Board board;
     std::vector<Player> players;
+    unsigned currentPlayer;
     Man currentPiece;
     //int currentPieceColor; //dans player?
     Point currentPiecePosition; //déplacer dans player?
