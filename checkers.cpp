@@ -78,10 +78,27 @@ void Checkers::addMovablePositions(
 {
     if (board.isOnBoard(corner))
     {
-        if (board.isCellEmpty(corner) && capturedOnPath.empty() && isInTheRightDirection(corner))
+        if (board.isCellEmpty(corner) && ((capturedOnPath.empty() && isInTheRightDirection(corner))
+                                          || currentPiece.isKing()))
         {
             movablePositions.push_back(
-                    std::pair<Point, std::vector<Point>>(corner, capturedOnPath));
+                std::pair<Point, std::vector<Point>>(corner, capturedOnPath));
+           /*
+            if (currentPiece.isKing())
+            {
+                int nbOfFreePos = addFreePositionsFromDiagonal(corner,
+                                             corner.getRelativeDirection(position),
+                                             movablePositions);
+
+                if ((nbOfFreePos != 0) && )
+                { // check not in vector
+                    capturedOnPath.push_back(corner);
+                    movablePositions.push_back(
+                          std::pair<Point, std::vector<Point>>(destination, capturedOnPath));
+
+                    getMovablePositionsFrom(destination, movablePositions, capturedOnPath);
+                }
+            }*/
         }
         else if (isEnnemyPosition(corner, currentPiece.getColor()))
         {
