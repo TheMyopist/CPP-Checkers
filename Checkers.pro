@@ -1,7 +1,8 @@
 TEMPLATE = app
+QT += widgets
 CONFIG += console c++14
 CONFIG -= app_bundle
-CONFIG -= qt
+
 
 SOURCES += main.cpp \
     point.cpp \
@@ -14,7 +15,8 @@ SOURCES += main.cpp \
     checkers.cpp \
     player.cpp \
     iaplayer.cpp \
-    checkerstest.cpp
+    checkerstest.cpp \
+    view/menu.cpp
 
 HEADERS += \
     point.h \
@@ -25,4 +27,5 @@ HEADERS += \
     checkers.h \
     player.h \
     iaplayer.h \
-    color.h
+    color.h \
+    view/menu.h
