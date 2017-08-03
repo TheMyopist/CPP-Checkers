@@ -1,6 +1,6 @@
 #include "manview.h"
 
-manView::manView(Man & man, const Point & position,
+ManView::ManView(Man & man, const Point & position,
                  const unsigned cellHeight, const unsigned cellWidth)
     : QGraphicsEllipseItem(viewUtilities::toQRect(position,cellHeight,cellWidth)),
       man{man},
@@ -11,4 +11,4 @@ manView::manView(Man & man, const Point & position,
     this->setBrush(this->brush);
 }
 
-manView::~manView() {}
+ManView::~ManView() {}

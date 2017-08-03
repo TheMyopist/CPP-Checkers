@@ -8,7 +8,7 @@
 #include <view/viewutilities.h>
 #include <man.h>
 
-class manView : public QGraphicsEllipseItem
+class ManView : public QGraphicsEllipseItem
 {
 
 private:
@@ -17,12 +17,14 @@ private:
     QPen pen;
 
     QBrush brush;
+
+    QGraphicsEllipseItem crown;
 public:
-    manView(Man &man, const Point &, const unsigned, const unsigned);
+    ManView(Man &man, const Point &, const unsigned, const unsigned);
 
-    ~manView();
+    ~ManView();
 
-    void crown();
+    //void crown();
 protected:
     void highlightMan(QMouseEvent *);
 };
