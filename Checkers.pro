@@ -19,7 +19,9 @@ SOURCES += main.cpp \
     view/menu.cpp \
     view/manview.cpp \
     view/viewutilities.cpp \
-    view/cellview.cpp
+    view/cellview.cpp \
+    view/boardview.cpp \
+    view/mainwindow.cpp
 
 HEADERS += \
     point.h \
@@ -34,4 +36,7 @@ HEADERS += \
     view/menu.h \
     view/manview.h \
     view/viewutilities.h \
-    view/cellview.h
+    view/cellview.h \
+    view/boardview.h \
+    view/mainwindow.h \
+    view/config.h

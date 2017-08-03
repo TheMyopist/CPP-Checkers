@@ -6,7 +6,7 @@ Board::Board(const unsigned int height, const unsigned int width)
       grid(height, std::vector<Cell>(width,{GREY}))
 {
     colorize();
-    //initMen();
+    initMen();
 }
 
 bool Board::isCellEmpty(const Point & position)
@@ -24,12 +24,12 @@ void Board::colorize()
 {
     for (int i = 0; i < (int)height; i++ )
     {
-        unsigned color = (i % 2 == 0) ? BLACK : WHITE;
+        unsigned color = (i % 2 == 0) ? RED : BLUE;
 
         for (int j = 0; j < (int)width; j++ )
         {
             colorizeCell(Point{i,j}, color);
-            color = (color == BLACK) ? WHITE : BLACK;
+            color = (color == RED) ? BLUE : RED;
         }
     }
 }
@@ -54,10 +54,10 @@ void Board::initMen()
             Point positionTop{(int)(height -1)-i,(int)(width-1)-j};
             Point positionDown{i,j};
 
-            if(getCellAt(positionTop).getColor() == BLACK)
+            if(getCellAt(positionTop).getColor() == BLUE)
             {
-                getCellAt(positionTop).addMan(BLACK);
-                getCellAt(positionDown).addMan(BLACK);
+                getCellAt(positionTop).addMan(BLUE);
+                getCellAt(positionDown).addMan(BLUE);
             }
         }
     }

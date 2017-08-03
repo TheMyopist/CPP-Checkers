@@ -11,13 +11,18 @@ class CellView : public QGraphicsRectItem
 
 private:
     Cell cell;
+    Point position;
 
     QPen pen;
 
     QBrush brush;
+
 public:
-    CellView(Cell & cell, const Point &, const unsigned ,
-             const unsigned);
+    CellView(Cell & cell, const Point & position);
+
+protected:
+
+    void mousePressEvent(QGraphicsSceneMouseEvent *);
 };
 
 #endif // CELLVIEW_H

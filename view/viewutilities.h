@@ -10,6 +10,7 @@
 #include <QRect>
 #include <QString>
 #include <point.h>
+#include "view/config.h"
 
 /*!
  * Divers fonctions utilitaires nécessaires aux vues.
@@ -25,8 +26,10 @@ namespace viewUtilities
  */
 QPoint toQPoint(const Point &);
 
-QRect  toQRect(const Point & point, const unsigned x,
-                             const unsigned y);
+QPoint toRelativeQPoint(Point & point);
+
+QRect toQRect(const Point & upLeftCorner, const unsigned width = CELL_SIZE,
+                             const unsigned height = CELL_SIZE);
 
 QColor toQColor(const unsigned);
 

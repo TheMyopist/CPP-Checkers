@@ -13,20 +13,16 @@ class ManView : public QGraphicsEllipseItem
 
 private:
     Man  man;
+    Point position;
 
     QPen pen;
 
     QBrush brush;
 
-    QGraphicsEllipseItem crown;
 public:
-    ManView(Man &man, const Point &, const unsigned, const unsigned);
+    ManView(Man &man, const Point &);
 
     ~ManView();
-
-    //void crown();
-protected:
-    void highlightMan(QMouseEvent *);
 };
 
 #endif // MANVIEW_H

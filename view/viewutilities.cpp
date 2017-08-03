@@ -1,16 +1,22 @@
 #include "viewutilities.h"
 
+#include "view/config.h"
+
 QPoint viewUtilities::toQPoint(const Point & point)
 {
     return QPoint{point.getX(), point.getY()};
 }
 
-QRect viewUtilities::toQRect(const Point & point, const unsigned x,
-                             const unsigned y)
+QPoint viewUtilities::toRelativeQPoint(Point & point)
 {
-    QPoint qPoint = viewUtilities::toQPoint(point);
+    return QPoint{point.getX() * CELL_SIZE, point.getY() * CELL_SIZE};
+}
 
-    return QRect(qPoint.x(),qPoint.y(),x,y);
+QRect viewUtilities::toQRect(const Point & upLeftCorner, const unsigned width,
+                             const unsigned height)
+{
+    return QRect(upLeftCorner.getX() * CELL_SIZE, upLeftCorner.getY() * CELL_SIZE,
+                 CELL_SIZE, CELL_SIZE);
 }
 
 QColor viewUtilities::toQColor(const unsigned color)
