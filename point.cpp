@@ -8,21 +8,21 @@ void Point::moveToDirection(int direction)
 {
     switch(direction)
     {
-        case SOUTH: x++;
+        case SOUTH: y++;
         break;
         case SOUTH_EAST: x++; y++;
         break;
-        case SOUTH_WEST: x++; y--;
+        case SOUTH_WEST: x--; y++;
         break;
-        case NORTH: x--;
+        case NORTH: y--;
         break;
-        case NORTH_EAST: x--; y++;
+        case NORTH_EAST: x++; y--;
         break;
         case NORTH_WEST: x--; y--;
         break;
-        case WEST: y--;
+        case WEST: x--;
         break;
-        case EAST: y++;
+        case EAST: x++;
         break;
     }
 }
@@ -34,17 +34,17 @@ int Point::getRelativeDirection(const Point & from)
     if (x == from.x)
     {
         if (y == from.y) {relativeDirection = CENTER;}
-        else {relativeDirection = y > from.y ? WEST : EAST;}
+        else {relativeDirection = y > from.y ? SOUTH : NORTH;}
     }
     else if (x > from.x)
     {
-        if (y == from.y) {relativeDirection = SOUTH;}
-        else {relativeDirection = y > from.y ? SOUTH_EAST : SOUTH_WEST;}
+        if (y == from.y) {relativeDirection = EAST;}
+        else {relativeDirection = y > from.y ? NORTH_EAST : NORTH_WEST;}
     }
     else if (x < from.x)
     {
-        if (y == from.y) {relativeDirection = NORTH;}
-        else {relativeDirection = y > from.y ? NORTH_EAST : NORTH_WEST;}
+        if (y == from.y) {relativeDirection = WEST;}
+        else {relativeDirection = y > from.y ? NORTH_WEST : NORTH_EAST;}
     }
 
     return relativeDirection;
