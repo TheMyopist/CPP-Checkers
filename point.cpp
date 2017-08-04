@@ -39,12 +39,12 @@ int Point::getRelativeDirection(const Point & from)
     else if (x > from.x)
     {
         if (y == from.y) {relativeDirection = EAST;}
-        else {relativeDirection = y > from.y ? NORTH_EAST : NORTH_WEST;}
+        else {relativeDirection = y > from.y ? SOUTH_EAST : NORTH_EAST;}
     }
     else if (x < from.x)
     {
         if (y == from.y) {relativeDirection = WEST;}
-        else {relativeDirection = y > from.y ? NORTH_WEST : NORTH_EAST;}
+        else {relativeDirection = y > from.y ? SOUTH_WEST : NORTH_WEST;}
     }
 
     return relativeDirection;

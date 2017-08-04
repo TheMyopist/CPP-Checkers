@@ -17,8 +17,7 @@ private:
     std::vector<Player> players;
     unsigned currentPlayer;
     Man currentPiece;
-    //int currentPieceColor; //dans player?
-    Point currentPiecePosition; //déplacer dans player?
+    Point currentPiecePosition;
     unsigned turn;
     bool gameOver;
     bool multiplayer; //par défaut on joue contre IA
@@ -32,7 +31,7 @@ public:
 
     Board & getBoard(); //le get modifie pas le board, mais le board peut être modifié par une autre fonction qui appellele get
     std::vector<Player> & getPlayers() const;
-    const unsigned getTurn() const; //get turnt lol
+    const unsigned getTurn() const;
     const bool isMultiplayer() const;
 
     void play(std::pair<Point, std::vector<Point>> &);
@@ -44,8 +43,6 @@ public:
     void isTurnOver(); //ptet pas nécéssaire
     void isGameOver(); //si abandon,si fin impossible, si victoire
 
-    //retourne la nouvelle position et les positions éventuelles
-    //d'ennemis capturés
 
    std::vector< std::pair<Point, std::vector<Point>> > getMovablePositionsFrom(
             const Point &);

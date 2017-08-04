@@ -7,7 +7,7 @@
 #include <QWidget>
 #include <QtWidgets>
 
-class Menu : public QWidget
+class MainMenu : public QWidget
 {
     Q_OBJECT
 
@@ -17,7 +17,7 @@ private:
     QPushButton *multiplayer = new QPushButton("Multiplayer", this);
 
 public:
-    Menu();
+    MainMenu();
 };
 
 #endif // MENU_H

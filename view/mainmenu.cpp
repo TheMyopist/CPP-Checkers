@@ -1,6 +1,6 @@
-#include "menu.h"
+#include "mainmenu.h"
 
-Menu::Menu() : QWidget()
+MainMenu::MainMenu() : QWidget()
 { 
     QHBoxLayout *titleLayout = new QHBoxLayout;
     QVBoxLayout *buttonsLayout  = new QVBoxLayout;

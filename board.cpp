@@ -6,7 +6,7 @@ Board::Board(const unsigned int height, const unsigned int width)
       grid(height, std::vector<Cell>(width,{GREY}))
 {
     colorize();
-    initMen();
+    //initMen();
 }
 
 bool Board::isCellEmpty(const Point & position)
