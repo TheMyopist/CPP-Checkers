@@ -16,20 +16,20 @@ bool Board::isCellEmpty(const Point & position)
 
 bool Board::isOnBoard(const Point & position) const
 {
-    return (position.getX() < (int)height && position.getX() >= 0)
-            && (position.getY() < (int)width && position.getY() >= 0);
+    return (position.getY() < (int)height && position.getY() >= 0)
+            && (position.getX() < (int)width && position.getX() >= 0);
 }
 
 void Board::colorize()
 {
     for (int i = 0; i < (int)height; i++ )
     {
-        unsigned color = (i % 2 == 0) ? RED : BLUE;
+        unsigned color = (i % 2 == 0) ? WHITE : BLACK;
 
         for (int j = 0; j < (int)width; j++ )
         {
-            colorizeCell(Point{i,j}, color);
-            color = (color == RED) ? BLUE : RED;
+            colorizeCell(Point{j,i}, color);
+            color = (color == WHITE) ? BLACK : WHITE;
         }
     }
 }
@@ -51,13 +51,13 @@ void Board::initMen()
     {
         for (int j = 0; j < (int)width; j++ )
         {
-            Point positionTop{(int)(height -1)-i,(int)(width-1)-j};
-            Point positionDown{i,j};
+            Point positionDown{(int)(width -1)-j,(int)(height-1)-i};
+            Point positionTop{j,i};
 
-            if(getCellAt(positionTop).getColor() == BLUE)
+            if(getCellAt(positionTop).getColor() == BLACK)
             {
-                getCellAt(positionTop).addMan(BLUE);
-                getCellAt(positionDown).addMan(BLUE);
+                getCellAt(positionTop).addMan(BLUE); //BLACK
+                getCellAt(positionDown).addMan(RED); //WHITE
             }
         }
     }

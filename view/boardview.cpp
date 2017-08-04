@@ -16,20 +16,18 @@ BoardView::BoardView(QWidget * parent)
     {
         for (int j = 0; j < (int) board.getWidth(); j++)
         {
-            Point position{i, j};
+            Point position{j, i};
             CellView* cellView = new CellView{board.getCellAt(position), position};
 
-            (grid[i])[j] = cellView;
+            grid[j][i] = cellView;
             this->scene->addItem(cellView);
 
             if (! board.isCellEmpty(position))
             {
-                std::cout << " hhhhhh ";
-
                 ManView* man = new ManView{board.getCellAt(position).getMan(),
                                             position};
 
-                (men[i])[j] = man;
+                men[j][i] = man;
                 this->scene->addItem(man);
             }
         }
