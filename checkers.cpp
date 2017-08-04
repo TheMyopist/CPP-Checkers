@@ -41,6 +41,10 @@ void Checkers::makeMove(std::pair<Point, std::vector<Point> > & pairToPlay)
 
     for (Point & capturedEnemyPosition : pairToPlay.second)
         removeMan(capturedEnemyPosition);
+
+    chosenMove = pairToPlay;
+
+    notifyViews(MOVE_MADE);
 }
 
 std::vector< std::pair<Point, std::vector<Point>> > Checkers::getMovablePositionsFrom(
@@ -182,11 +186,10 @@ void Checkers::addView(CheckersView * newView)
     this->views.push_back(newView);
 }
 
-void::Checkers::notifyViews(std::pair<Point, std::vector<Point> >
-                            & positionsToUpdate)
+void::Checkers::notifyViews(unsigned checkersEvent)
 {
     for(CheckersView view : this->views)
-        view.updateDisplay(positionsToUpdate,this->currentPiecePosition);
+        view.update(checkersEvent);
 }
 
 Checkers::~Checkers(){}
@@ -195,4 +198,11 @@ Checkers::~Checkers(){}
 void Checkers::switchCurrentPlayer()
 {
     currentPlayer = ++currentPlayer % 2;
+
+    notifyViews(PLAYER_SWITCHED);
+}
+
+void Checkers::setCurrentPosition(const Point & position)
+{
+    currentPiecePosition = position;
 }

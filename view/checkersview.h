@@ -4,6 +4,7 @@
 #include "view/cellview.h"
 #include "view/manview.h"
 #include "checkers.h"
+#include "checkersevent.h"
 #include <QGraphicsView>
 #include <QGraphicsScene>
 
@@ -26,7 +27,7 @@ public:
 
     void showMovablePositionsFrom(const Point &); //avec un putain de clic?
 
-    void updateDisplay(std::pair<Point, std::vector<Point> > &, const Point &);
+    void update(unsigned);
 };
 
 #endif // BOARDVIEW_H

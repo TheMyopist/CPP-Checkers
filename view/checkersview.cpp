@@ -23,7 +23,7 @@ CheckersView::CheckersView(QWidget * parent)
             if (! checkers->getBoard().isCellEmpty(position))
             {
                 ManView* man = new ManView{checkers->getBoard().getCellAt(position).getMan(),
-                                            position};
+                        position};
 
                 men[j][i] = man;
                 this->scene->addItem(man);
@@ -32,16 +32,15 @@ CheckersView::CheckersView(QWidget * parent)
     }
 }
 
-void CheckersView::updateDisplay(std::pair<Point, std::vector<Point> >
-                              & positionsToUpdate, const Point & positionToClear)
+void CheckersView::update(unsigned checkersEvent)
 {
-//    for(CellView & cell : this->grid)
-
-
-//    for(ManView & man : this->men)
-//        if(man.getPosition == positionToClear)
-//            man.close();
-//            delete man;
+    switch(checkersEvent)
+    {
+    case MOVE_MADE :
+        break;
+    case PLAYER_SWITCHED :
+        break;
+    }
 }
 
 // faire destructeur qui free les cellViews

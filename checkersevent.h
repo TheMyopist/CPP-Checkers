@@ -1,0 +1,7 @@
+#ifndef CHECKERSEVENT_H
+#define CHECKERSEVENT_H
+
+#define MOVE_MADE 0
+#define PLAYER_SWITCHED 1
+
+#endif // CHECKERSEVENT_H

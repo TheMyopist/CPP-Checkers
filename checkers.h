@@ -36,6 +36,7 @@ public:
     void initPlayers(const bool);
     void setCurrentPiece(Man &,Point &);
     void switchCurrentPlayer();
+    void setCurrentPosition(const Point &);
 
     Board & getBoard(); //le get modifie pas le board, mais le board peut être modifié par une autre fonction qui appellele get
     std::vector<Player> & getPlayers() const;
@@ -87,7 +88,7 @@ public:
          * changé en communiquant la nouvelle position de la position courante
          * ainsi que les éventuelles positions capturées.
          */
-    void notifyViews(std::pair<Point, std::vector<Point>> &);
+    void notifyViews(unsigned);
 
 };
 

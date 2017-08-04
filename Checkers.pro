@@ -39,4 +39,5 @@ HEADERS += \
     view/mainwindow.h \
     view/config.h \
     view/mainmenu.h \
-    view/checkersview.h
+    view/checkersview.h \
+    checkersevent.h
