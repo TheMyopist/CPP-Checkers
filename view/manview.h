@@ -12,7 +12,7 @@ class ManView : public QGraphicsEllipseItem
 {
 
 private:
-    Man  man;
+    Man   man;
     Point position;
 
     QPen pen;
@@ -21,6 +21,10 @@ private:
 
 public:
     ManView(Man &man, const Point &);
+
+    void update(const Point &);
+    void updatePosition(const Point &);
+
 
     ~ManView();
 };

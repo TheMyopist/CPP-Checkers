@@ -30,7 +30,7 @@ void Checkers::addMan(const Point & position,const Man & man)
     board.getCellAt(position).addMan(man);
 }
 
-void Checkers::play(std::pair<Point, std::vector<Point> > & pairToPlay)
+void Checkers::makeMove(std::pair<Point, std::vector<Point> > & pairToPlay)
 {
     removeMan(currentPiecePosition);
 
@@ -41,8 +41,6 @@ void Checkers::play(std::pair<Point, std::vector<Point> > & pairToPlay)
 
     for (Point & capturedEnemyPosition : pairToPlay.second)
         removeMan(capturedEnemyPosition);
-
-    currentPlayer = ++currentPlayer % 2;
 }
 
 std::vector< std::pair<Point, std::vector<Point>> > Checkers::getMovablePositionsFrom(
@@ -82,8 +80,8 @@ void Checkers::addMovablePositions(
                                           || currentPiece.isKing()))
         {
             movablePositions.push_back(
-                std::pair<Point, std::vector<Point>>(corner, capturedOnPath));
-           /*
+                        std::pair<Point, std::vector<Point>>(corner, capturedOnPath));
+            /*
             if (currentPiece.isKing())
             {
                 int nbOfFreePos = addFreePositionsFromDiagonal(corner,
@@ -103,7 +101,7 @@ void Checkers::addMovablePositions(
         else if (isEnnemyPosition(corner, currentPiece.getColor()))
         {
             Point destination{corner.newRelativePoint
-                    (corner.getRelativeDirection(position))};
+                        (corner.getRelativeDirection(position))};
 
             if (isEnnemyPosition(corner,currentPiece.getColor())
                     && board.isOnBoard(destination)
@@ -111,7 +109,7 @@ void Checkers::addMovablePositions(
             {
                 capturedOnPath.push_back(corner);
                 movablePositions.push_back(
-                      std::pair<Point, std::vector<Point>>(destination, capturedOnPath));
+                            std::pair<Point, std::vector<Point>>(destination, capturedOnPath));
 
                 getMovablePositionsFrom(destination, movablePositions, capturedOnPath);
             }
@@ -142,7 +140,7 @@ bool Checkers::isEnnemyPosition(const Point & position,
 bool Checkers::isOnCrownLine(const Point & position) const
 {
     return ((currentPiece.getColor()) == (WHITE && position.getX() == 0))
-           || ((currentPiece.getColor() == BLACK) && (position.getX() == board.getHeight() - 1));
+            || ((currentPiece.getColor() == BLACK) && (position.getX() == board.getHeight() - 1));
 }
 
 bool Checkers::isInTheRightDirection(const Point & position) const
@@ -150,7 +148,7 @@ bool Checkers::isInTheRightDirection(const Point & position) const
     int color = currentPiece.getColor();
 
     return ((color == WHITE) && (position.getX() < currentPiecePosition.getX()))
-           || ((color == BLACK) && (position.getX() > currentPiecePosition.getX()));
+            || ((color == BLACK) && (position.getX() > currentPiecePosition.getX()));
 }
 
 std::vector<std::pair<Point, std::vector<Point>>> trimBiggestPaths
@@ -177,4 +175,24 @@ std::vector<std::pair<Point, std::vector<Point>>> trimBiggestPaths
     }
 
     return biggestPaths;
+}
+
+void Checkers::addView(CheckersView * newView)
+{
+    this->views.push_back(newView);
+}
+
+void::Checkers::notifyViews(std::pair<Point, std::vector<Point> >
+                            & positionsToUpdate)
+{
+    for(CheckersView view : this->views)
+        view.updateDisplay(positionsToUpdate,this->currentPiecePosition);
+}
+
+Checkers::~Checkers(){}
+
+
+void Checkers::switchCurrentPlayer()
+{
+    currentPlayer = ++currentPlayer % 2;
 }

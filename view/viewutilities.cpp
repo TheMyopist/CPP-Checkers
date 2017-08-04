@@ -16,7 +16,7 @@ QRect viewUtilities::toQRect(const Point & upLeftCorner, const unsigned width,
                              const unsigned height)
 {
     return QRect(upLeftCorner.getX() * CELL_SIZE, upLeftCorner.getY() * CELL_SIZE,
-                 CELL_SIZE, CELL_SIZE);
+                 CELL_SIZE - 2, CELL_SIZE - 2);
 }
 
 QColor viewUtilities::toQColor(const unsigned color)

@@ -20,9 +20,8 @@ private:
 public:
     CellView(Cell & cell, const Point & position);
 
-protected:
-
-    void mousePressEvent(QGraphicsSceneMouseEvent *);
+    void highLight();
+    void setDefaultBackground();
 };
 
 #endif // CELLVIEW_H

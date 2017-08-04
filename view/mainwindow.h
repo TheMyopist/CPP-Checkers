@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QMainWindow>
 
-#include "boardview.h"
+#include "checkersview.h"
 #include "mainmenu.h"
 
 class MainWindow : public QMainWindow
@@ -39,7 +39,7 @@ private:
          */
     void connectAll();
 
-    BoardView boardView;
+    CheckersView boardView;
 
 public:
     MainWindow(QWidget *parent = 0);
