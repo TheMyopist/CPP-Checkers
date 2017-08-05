@@ -28,6 +28,8 @@ public:
     void showMovablePositionsFrom(const Point &); //avec un putain de clic?
 
     void update(unsigned);
+
+    void switchPlayer();
 };
 
 #endif // BOARDVIEW_H

@@ -28,6 +28,8 @@ CheckersView::CheckersView(QWidget * parent)
                 men[j][i] = man;
                 this->scene->addItem(man);
             }
+            else
+                men[j][i] = 0;
         }
     }
 }
@@ -38,7 +40,7 @@ void CheckersView::update(unsigned checkersEvent)
     {
     case MOVE_MADE :
         break;
-    case PLAYER_SWITCHED :
+    case PLAYER_SWITCHED : switchPlayer();
         break;
     }
 }
@@ -47,4 +49,14 @@ void CheckersView::update(unsigned checkersEvent)
 CheckersView::~CheckersView()
 {
     free(this->checkers);
+}
+
+void CheckersView::switchPlayer()
+{
+    for(int i = 0; i < men.size(); i++ )
+        for(int j = 0; j < men.at(i).size(); j++)
+            if (men[i][j] != 0)
+                men[i][j]->setClickable(men[i][j]->getMan().getColor()
+                                        == checkers->getPlayers()
+                                        .at(checkers->getCurrentPlayer()).getColor());
 }

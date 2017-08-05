@@ -11,14 +11,13 @@ CellView::CellView(Cell & cell, const Point & position)
     this->setBrush(this->brush);
 }
 
-void CellView::highLight()
-{
-    brush.setColor(viewUtilities::toQColor(GREEN));
-    this->setBrush(this->brush);
-}
-
 void CellView::setDefaultBackground()
 {
     brush.setColor(viewUtilities::toQColor(cell.getColor()));
     this->setBrush(this->brush);
+}
+
+void CellView::mousePressEvent(QGraphicsSceneMouseEvent *)
+{
+
 }

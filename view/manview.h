@@ -12,6 +12,7 @@ class ManView : public QGraphicsEllipseItem
 {
 
 private:
+    bool isClickable;
     Man   man;
     Point position;
 
@@ -24,9 +25,21 @@ public:
 
     void update(const Point &);
     void updatePosition(const Point &);
+    void setClickable(bool);
 
+    Man getMan();
 
     ~ManView();
+
+protected:
+
+    void mousePressEvent(QGraphicsSceneMouseEvent *);
+
 };
+
+inline Man ManView::getMan()
+{
+    return man;
+}
 
 #endif // MANVIEW_H

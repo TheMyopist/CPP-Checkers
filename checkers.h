@@ -39,8 +39,9 @@ public:
     void setCurrentPosition(const Point &);
 
     Board & getBoard(); //le get modifie pas le board, mais le board peut être modifié par une autre fonction qui appellele get
-    std::vector<Player> & getPlayers() const;
+    const std::vector<Player> & getPlayers() const;
     const unsigned getTurn() const;
+    const unsigned getCurrentPlayer() const;
     const bool isMultiplayer() const;
 
     void makeMove(std::pair<Point, std::vector<Point>> &);
@@ -103,4 +104,15 @@ inline void Checkers::setCurrentPiece(Man & newCurrentPiece
     currentPiece = newCurrentPiece;
     currentPiecePosition = newCurrentPosition;
 }
+
+inline const unsigned Checkers::getCurrentPlayer() const
+{
+    return currentPlayer;
+}
+
+inline const std::vector<Player> & Checkers::getPlayers() const
+{
+    return players;
+}
+
 #endif // CHECKERS_H

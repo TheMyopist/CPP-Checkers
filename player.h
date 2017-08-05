@@ -47,4 +47,14 @@ public:
     void removeMen(const unsigned);
 };
 
+inline const unsigned Player::getColor() const
+{
+    return color;
+}
+
+inline unsigned Player::getNumberOfMen() const
+{
+    return numberOfMen;
+}
+
 #endif // PLAYER_H
