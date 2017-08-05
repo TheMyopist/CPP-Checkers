@@ -159,7 +159,7 @@ std::vector<std::pair<Point, std::vector<Point>>> Checkers::trimBiggestPaths
     size_t vectorSize = 0;
 
 
-    for(std::pair<Point, std::vector<Point>> capturedPosition : capturedPositions )
+    for(std::pair<Point, std::vector<Point>> & capturedPosition  : capturedPositions )
     {
         vectorSize = capturedPosition.second.size();
 
@@ -167,7 +167,7 @@ std::vector<std::pair<Point, std::vector<Point>>> Checkers::trimBiggestPaths
             biggestSize = vectorSize;
     }
 
-    for(std::pair<Point, std::vector<Point>> capturedPosition : capturedPositions )
+    for(std::pair<Point, std::vector<Point>> & capturedPosition : capturedPositions )
     {
         vectorSize = capturedPosition.second.size();
         if(vectorSize == biggestSize)

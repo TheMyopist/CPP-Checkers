@@ -129,8 +129,8 @@ void CheckersView::disableAllCells()
         }
 }
 
-void CheckersView::selectMovePosition(Point & dest)
+void CheckersView::selectMovePosition(const Point & destination)
 {
     this->disableAllCells();
-    this->checkers->makeMove(dest);
+    this->checkers->makeMove(destination);
 }

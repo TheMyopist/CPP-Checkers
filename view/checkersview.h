@@ -42,7 +42,7 @@ public:
     void highlightMovablepositions(std::vector< std::pair<Point, std::vector<Point>> > &
                             movablepositions);
 
-    void selectMovePosition(Point & dest);
+    void selectMovePosition(const Point &);
 };
 
 #endif // BOARDVIEW_H
