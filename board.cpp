@@ -56,8 +56,8 @@ void Board::initMen()
 
             if(getCellAt(positionTop).getColor() == BLACK)
             {
-                getCellAt(positionTop).addMan(BLUE); //BLACK
-                getCellAt(positionDown).addMan(RED); //WHITE
+                getCellAt(positionTop).addMan(BLACK); //BLACK
+                getCellAt(positionDown).addMan(WHITE); //WHITE
             }
         }
     }

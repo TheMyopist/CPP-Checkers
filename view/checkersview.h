@@ -9,6 +9,8 @@
 #include <QGraphicsScene>
 
 class Checkers;
+class ManView;
+class CellView;
 
 class CheckersView : public QGraphicsView
 {
@@ -25,11 +27,22 @@ public:
 
     ~CheckersView();
 
-    void showMovablePositionsFrom(const Point &); //avec un putain de clic?
-
     void update(unsigned);
 
     void switchPlayer();
+
+    void updatePositions();
+
+    void selectPieceToPlay(Point &);
+
+    void disableAllCells();
+
+    void disableAllMen();
+
+    void highlightMovablepositions(std::vector< std::pair<Point, std::vector<Point>> > &
+                            movablepositions);
+
+    void selectMovePosition(Point & dest);
 };
 
 #endif // BOARDVIEW_H

@@ -7,6 +7,9 @@
 #include <QRect>
 #include <view/viewutilities.h>
 #include <man.h>
+#include "view/checkersview.h"
+
+class CheckersView;
 
 class ManView : public QGraphicsEllipseItem
 {
@@ -16,12 +19,14 @@ private:
     Man   man;
     Point position;
 
+    CheckersView *checkersView;
+
     QPen pen;
 
     QBrush brush;
 
 public:
-    ManView(Man &man, const Point &);
+    ManView(Man &man, const Point &, CheckersView *checkersView);
 
     void update(const Point &);
     void updatePosition(const Point &);

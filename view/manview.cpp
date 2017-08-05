@@ -1,12 +1,14 @@
 #include "manview.h"
 
-ManView::ManView(Man & man, const Point & position)
+#include <iostream>
+
+ManView::ManView(Man & man, const Point & position, CheckersView *checkersView)
     : QGraphicsEllipseItem(viewUtilities::toQRect(position)),
       man{man},
       position{position},
-      pen{viewUtilities::toQColor(man.getColor()),1,Qt::SolidLine},
+      pen{viewUtilities::toQColor(man.getColor() == BLACK ? BLUE: RED),1,Qt::SolidLine},
       brush{man.getColor()},
-      isClickable{false}
+      isClickable{false}, checkersView{checkersView}
 {
     this->setPen(this->pen);
     this->setBrush(this->brush);
@@ -21,7 +23,6 @@ ManView::~ManView(){}
 
 void ManView::mousePressEvent(QGraphicsSceneMouseEvent *)
 {
-//    if (isClickable)
-//    {
-//    }
+    if (isClickable)
+        this->checkersView->selectPieceToPlay(this->position);
 }

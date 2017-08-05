@@ -34,17 +34,18 @@ public:
     ~Checkers();
 
     void initPlayers(const bool);
-    void setCurrentPiece(Man &,Point &);
     void switchCurrentPlayer();
-    void setCurrentPosition(const Point &);
+    void setCurrentPiecePosition(const Point &);
 
+    std::pair<Point, std::vector<Point>> & getChosenMove();
     Board & getBoard(); //le get modifie pas le board, mais le board peut être modifié par une autre fonction qui appellele get
     const std::vector<Player> & getPlayers() const;
     const unsigned getTurn() const;
-    const unsigned getCurrentPlayer() const;
+    const Player &getCurrentPlayer() const;
     const bool isMultiplayer() const;
 
-    void makeMove(std::pair<Point, std::vector<Point>> &);
+    Point & getCurrentPiecePosition();
+    void makeMove(Point dest);
     bool isOnCrownLine(const Point &) const;
     bool isInTheRightDirection(const Point & position) const;
 
@@ -98,16 +99,9 @@ inline Board & Checkers::getBoard()
     return board;
 }
 
-inline void Checkers::setCurrentPiece(Man & newCurrentPiece
-                                      , Point & newCurrentPosition)
+inline const Player & Checkers::getCurrentPlayer() const
 {
-    currentPiece = newCurrentPiece;
-    currentPiecePosition = newCurrentPosition;
-}
-
-inline const unsigned Checkers::getCurrentPlayer() const
-{
-    return currentPlayer;
+    return this->players.at(currentPlayer);
 }
 
 inline const std::vector<Player> & Checkers::getPlayers() const

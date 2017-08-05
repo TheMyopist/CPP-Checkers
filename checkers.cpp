@@ -30,26 +30,41 @@ void Checkers::addMan(const Point & position,const Man & man)
     board.getCellAt(position).addMan(man);
 }
 
-void Checkers::makeMove(std::pair<Point, std::vector<Point> > & pairToPlay)
+void Checkers::makeMove(Point dest)
 {
-    removeMan(currentPiecePosition);
+    int index = 0; int i = 0;
+    std::vector< std::pair<Point, std::vector<Point>> > movablePositions
+            = getMovablePositionsFrom(currentPiecePosition);
 
-    if((isOnCrownLine(pairToPlay.first)) && (!currentPiece.isKing()))
+    for (auto & pos : movablePositions)
+    {
+        if (pos.first == dest)
+            index = i;
+
+        i++;
+    }
+
+    chosenMove = movablePositions[index];
+
+    removeMan(currentPiecePosition);
+    addMan(chosenMove.first, currentPiece);
+
+    if((isOnCrownLine(chosenMove.first)) && (!currentPiece.isKing()))
         currentPiece.crown();
 
-    addMan(pairToPlay.first,currentPiece);
-
-    for (Point & capturedEnemyPosition : pairToPlay.second)
+    for (Point & capturedEnemyPosition : chosenMove.second)
         removeMan(capturedEnemyPosition);
 
-    chosenMove = pairToPlay;
-
     notifyViews(MOVE_MADE);
+
+    switchCurrentPlayer();
 }
 
 std::vector< std::pair<Point, std::vector<Point>> > Checkers::getMovablePositionsFrom(
         const Point & position)
 {
+    std::cout << position.getX() << " " << position.getY();
+
     std::vector< std::pair<Point, std::vector<Point>> > movablePositions;
     std::vector<Point> capturedOnPath;
 
@@ -188,8 +203,8 @@ void Checkers::addView(CheckersView * newView)
 
 void::Checkers::notifyViews(unsigned checkersEvent)
 {
-    for(CheckersView view : this->views)
-        view.update(checkersEvent);
+    for(CheckersView * view : this->views)
+        view->update(checkersEvent);
 }
 
 Checkers::~Checkers(){}
@@ -197,12 +212,24 @@ Checkers::~Checkers(){}
 
 void Checkers::switchCurrentPlayer()
 {
+    nextTurn();
     currentPlayer = ++currentPlayer % 2;
 
     notifyViews(PLAYER_SWITCHED);
 }
 
-void Checkers::setCurrentPosition(const Point & position)
+void Checkers::setCurrentPiecePosition(const Point & position)
 {
     currentPiecePosition = position;
+    currentPiece = board.getCellAt(position).getMan();
+}
+
+std::pair<Point, std::vector<Point>> & Checkers::getChosenMove()
+{
+    return chosenMove;
+}
+
+Point & Checkers::getCurrentPiecePosition()
+{
+    return this->currentPiecePosition;
 }
