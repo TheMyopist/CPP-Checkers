@@ -92,6 +92,8 @@ public:
          */
     void notifyViews(unsigned);
 
+    std::vector<std::pair<Point, std::vector<Point>>> trimBiggestPaths
+    (std::vector<std::pair<Point, std::vector<Point>>> & capturedPositions);
 };
 
 inline Board & Checkers::getBoard()

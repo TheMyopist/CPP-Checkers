@@ -96,7 +96,6 @@ void CheckersView::selectPieceToPlay(Point & selectedPiecePos)
 
     if (! movablePositions.empty())
     {
-        //this->checkers->setCurrentPiecePosition(selectedPiecePos);
         this->highlightMovablepositions(movablePositions);
         this->disableAllMen();
     }

@@ -6,7 +6,7 @@ ManView::ManView(Man & man, const Point & position, CheckersView *checkersView)
     : QGraphicsEllipseItem(viewUtilities::toQRect(position)),
       man{man},
       position{position},
-      pen{viewUtilities::toQColor(man.getColor() == BLACK ? BLUE: RED),1,Qt::SolidLine},
+      pen{viewUtilities::toQColor(man.getColor() == BLACK ? BLUE: RED), 2,Qt::SolidLine},
       brush{man.getColor()},
       isClickable{false}, checkersView{checkersView}
 {

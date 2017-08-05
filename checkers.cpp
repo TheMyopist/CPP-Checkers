@@ -63,14 +63,12 @@ void Checkers::makeMove(Point dest)
 std::vector< std::pair<Point, std::vector<Point>> > Checkers::getMovablePositionsFrom(
         const Point & position)
 {
-    std::cout << position.getX() << " " << position.getY();
-
     std::vector< std::pair<Point, std::vector<Point>> > movablePositions;
     std::vector<Point> capturedOnPath;
 
     getMovablePositionsFrom(position, movablePositions, capturedOnPath);
 
-    return movablePositions;
+    return trimBiggestPaths(movablePositions);
 }
 
 void Checkers::getMovablePositionsFrom(
@@ -95,27 +93,10 @@ void Checkers::addMovablePositions(
 {
     if (board.isOnBoard(corner))
     {
-        if (board.isCellEmpty(corner) && ((capturedOnPath.empty() && isInTheRightDirection(corner))
-                                          || currentPiece.isKing()))
+        if (board.isCellEmpty(corner) && capturedOnPath.empty() && isInTheRightDirection(corner))
         {
             movablePositions.push_back(
                         std::pair<Point, std::vector<Point>>(corner, capturedOnPath));
-            /*
-            if (currentPiece.isKing())
-            {
-                int nbOfFreePos = addFreePositionsFromDiagonal(corner,
-                                             corner.getRelativeDirection(position),
-                                             movablePositions);
-
-                if ((nbOfFreePos != 0) && )
-                { // check not in vector
-                    capturedOnPath.push_back(corner);
-                    movablePositions.push_back(
-                          std::pair<Point, std::vector<Point>>(destination, capturedOnPath));
-
-                    getMovablePositionsFrom(destination, movablePositions, capturedOnPath);
-                }
-            }*/
         }
         else if (isEnnemyPosition(corner, currentPiece.getColor()))
         {
@@ -166,12 +147,12 @@ bool Checkers::isInTheRightDirection(const Point & position) const
 {
     int color = currentPiece.getColor();
 
-    return ((color == WHITE) && (position.getX() < currentPiecePosition.getX()))
-            || ((color == BLACK) && (position.getX() > currentPiecePosition.getX()));
+    return ((color == WHITE) && (position.getY() < currentPiecePosition.getY()))
+            || ((color == BLACK) && (position.getY() > currentPiecePosition.getY()));
 }
 
-std::vector<std::pair<Point, std::vector<Point>>> trimBiggestPaths
-(std::vector<std::pair<Point, std::vector<Point>>> capturedPositions)
+std::vector<std::pair<Point, std::vector<Point>>> Checkers::trimBiggestPaths
+(std::vector<std::pair<Point, std::vector<Point>>> & capturedPositions)
 {
     std::vector<std::pair<Point, std::vector<Point>>> biggestPaths;
     size_t biggestSize = 0;
