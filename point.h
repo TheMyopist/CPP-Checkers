@@ -107,8 +107,9 @@ public:
 //     */
 bool operator==(const Point &) const;
 
-
 };
+
+std::ostream & operator<<(std::ostream &, const Point &);
 
 inline int Point::getX() const
 {

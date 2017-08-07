@@ -134,7 +134,10 @@ std::vector<Point> Checkers::getCornersFromDestination(Point & from
 bool Checkers::isEnnemyPosition(const Point & position,
                                 const unsigned color)
 {
-    return board.getCellAt(position).getMan().getColor() != color;
+    Cell & cellToCheck = board.getCellAt(position);
+
+    return (!cellToCheck.isEmpty()) &&
+            (cellToCheck.getMan().getColor() != color);
 }
 
 bool Checkers::isOnCrownLine(const Point & position) const

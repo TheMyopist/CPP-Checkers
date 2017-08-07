@@ -63,7 +63,7 @@ void Board::initMen()
     }
 }
 
-Cell &Board::getCellAt(const Point & position) //const impossible de convertir de const Cell en Cell &
+Cell & Board::getCellAt(const Point & position)
 {
     return grid.at(position.getX()).at(position.getY());
 }

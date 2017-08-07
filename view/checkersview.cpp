@@ -85,6 +85,8 @@ void CheckersView::updatePositions()
 
        this->scene->removeItem(manToDl);
        delete manToDl;
+
+       men[positionToClear.getX()][positionToClear.getY()] = 0;
    }
 }
 
