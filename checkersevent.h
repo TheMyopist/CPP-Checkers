@@ -3,5 +3,6 @@
 
 #define MOVE_MADE 0
 #define PLAYER_SWITCHED 1
+#define END_OF_GAME 2
 
 #endif // CHECKERSEVENT_H

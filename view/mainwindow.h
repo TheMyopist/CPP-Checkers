@@ -39,7 +39,7 @@ private:
          */
     void connectAll();
 
-    CheckersView boardView;
+    CheckersView  * checkersView;
 
 public:
     MainWindow(QWidget *parent = 0);
@@ -56,7 +56,7 @@ public slots:
     /*!
      * \brief Permet d'afficher le niveau.
      */
-    void displayBoard();
+    void displayCheckers();
 };
 
 #endif // MAINWINDOW_H

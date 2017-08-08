@@ -7,17 +7,30 @@
 #include <QWidget>
 #include <QtWidgets>
 
-class MainMenu : public QWidget
+class MainMenu : public QFrame
 {
     Q_OBJECT
 
 private:
-    QLabel *title = new QLabel(GAMETITLE,this);
-    QPushButton *solo = new QPushButton("Solo", this);
-    QPushButton *multiplayer = new QPushButton("Multiplayer", this);
+    QPushButton *soloButton;
+    QPushButton *multiplayerButton;
+    QPushButton * quitButton;
+    QLabel * MainMenu::setLogo();
 
 public:
-    MainMenu();
+    /*!
+         * \brief Permet de créer un menu du jeu.
+         */
+        explicit MainMenu(QWidget * = 0);
+        ~MainMenu();
+
+signals:
+
+    void newMultiplayerGameSelected();
+    void newVersusAIGameSelected();
+
+private slots:
+    void startMultiplayerGame();
 };
 
 #endif // MENU_H

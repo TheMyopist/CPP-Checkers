@@ -1,5 +1,8 @@
 #include "checkersview.h"
 
+#include <QMessageBox>
+#include <QPushButton>
+#include <QMainWindow>
 #include <iostream>
 
 CheckersView::CheckersView(QWidget * parent)
@@ -33,8 +36,14 @@ CheckersView::CheckersView(QWidget * parent)
                 men[j][i] = 0;
         }
     }
-
     this->checkers->addView(this);
+}
+
+void CheckersView::startMultiplayerGame()
+{
+    //TO DO
+    std::cout << "multi commencé";
+    emit displayingStarted();
 }
 
 void CheckersView::update(unsigned checkersEvent)
@@ -45,6 +54,7 @@ void CheckersView::update(unsigned checkersEvent)
         break;
     case PLAYER_SWITCHED : switchPlayer();
         break;
+    case END_OF_GAME : displayEndOfGame();
     }
 }
 
@@ -135,4 +145,19 @@ void CheckersView::selectMovePosition(const Point & destination)
 {
     this->disableAllCells();
     this->checkers->makeMove(destination);
+}
+
+void CheckersView::displayEndOfGame()
+{
+    QMessageBox msgBox(this);
+    QPushButton *quitB = msgBox.addButton(tr("Retour au menu principal"),
+                                          QMessageBox::YesRole);
+
+    msgBox.addButton(tr("Recommencer"), QMessageBox::NoRole);
+    msgBox.setText(tr("<strong>Fin de partie :<strong>"));
+    msgBox.setWindowFlags(msgBox.windowFlags() ^ Qt::WindowCloseButtonHint);
+    msgBox.exec();
+
+    if(((QPushButton*) msgBox.clickedButton()) == quitB)
+        emit displayingStopped();
 }

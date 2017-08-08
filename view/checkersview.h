@@ -14,7 +14,8 @@ class CellView;
 
 class CheckersView : public QGraphicsView
 {
-private:
+    Q_OBJECT
+
     Checkers * checkers;
 
     std::vector<std::vector<CellView*>> grid;
@@ -40,9 +41,34 @@ public:
     void disableAllMen();
 
     void highlightMovablepositions(std::vector< std::pair<Point, std::vector<Point>> > &
-                            movablepositions);
+                                   movablepositions);
 
     void selectMovePosition(const Point &);
+
+    void displayEndOfGame();
+
+signals:
+
+    /*!
+     * \brief Signale que le niveau doit être affiché.
+     */
+    void displayingStarted();
+
+    /*!
+     * \brief Signale que le niveau ne doit plus être affiché.
+     */
+    void displayingStopped();
+
+public slots:
+    /*!
+     * \brief démarre une partie humain contre humain
+     */
+    void startMultiplayerGame();
+    /*!
+     * \brief démarre une partie humain contre IA
+     */
+    //TO DO QUAND AI OK
+    //void startSoloGame();
 };
 
 #endif // BOARDVIEW_H

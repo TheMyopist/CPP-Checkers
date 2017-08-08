@@ -1,24 +1,38 @@
 #include "mainmenu.h"
 
-MainMenu::MainMenu() : QWidget()
+MainMenu::MainMenu(QWidget *parent) : QFrame(parent),
+    soloButton{new QPushButton("Solo", this)},
+    multiplayerButton{new QPushButton("Multiplayer", this)},
+    quitButton{new QPushButton("Quit", this)}
 { 
-    QHBoxLayout *titleLayout = new QHBoxLayout;
-    QVBoxLayout *buttonsLayout  = new QVBoxLayout;
-    QVBoxLayout *menuLayout = new QVBoxLayout;
+   QVBoxLayout * lay{new QVBoxLayout};
+
+   QObject::connect(quitButton, SIGNAL(clicked()), qApp, SLOT(quit()));
+   QObject::connect(multiplayerButton, SIGNAL(clicked()), this, SLOT(startMultiplayerGame()));
+   //QObject::connect(soloButton, SIGNAL(clicked()), qApp, SLOT(quit()));
+
+
+   lay->addWidget(this->setLogo());
+   lay->addWidget(soloButton);
+   lay->addWidget(multiplayerButton);
+   lay->addWidget(quitButton);
+
+   this->setLayout(lay);
+}
+
+MainMenu::~MainMenu(){}
+
+QLabel * MainMenu::setLogo()
+{
+    QLabel * title = new QLabel("<h1><b>CHECKERS</b></h1>");
 
     title->setAlignment(Qt::AlignCenter);
-    solo->setMaximumWidth(60);
-    multiplayer->setMaximumWidth(60);
+    title->setStyleSheet("font-size: 50px");
 
-    titleLayout->addWidget(title);
-    buttonsLayout->addWidget(solo);
-    buttonsLayout->addWidget(multiplayer);
+    return title;
+}
 
-    titleLayout->setAlignment(Qt::AlignCenter);
-    buttonsLayout->setAlignment(Qt::AlignCenter);
-
-    menuLayout->addLayout(titleLayout);
-    menuLayout->addLayout(buttonsLayout);
-
-    this->setLayout(menuLayout);
+void MainMenu::startMultiplayerGame()
+{
+    emit newMultiplayerGameSelected();
 }
