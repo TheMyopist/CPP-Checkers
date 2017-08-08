@@ -52,12 +52,23 @@ void Checkers::makeMove(Point dest)
     if((isOnCrownLine(chosenMove.first)) && (!currentPiece.isKing()))
         currentPiece.crown();
 
-    for (Point & capturedEnemyPosition : chosenMove.second)
+    for (Point & capturedEnemyPosition : chosenMove.second) {
         removeMan(capturedEnemyPosition);
+        players.at(getEnnemy()).removeMan();
+    }
 
     notifyViews(MOVE_MADE);
 
-    switchCurrentPlayer();
+    std::cout << players[0].getNumberOfMen() << std::endl;
+
+    std::cout << players[1].getNumberOfMen() << std::endl;
+
+    if(isGameOver())
+    {
+        std::cout << "game ended in model";
+        notifyViews(END_OF_GAME);
+    }
+    else switchCurrentPlayer();
 }
 
 std::vector< std::pair<Point, std::vector<Point>> > Checkers::getMovablePositionsFrom(
@@ -197,7 +208,7 @@ Checkers::~Checkers(){}
 void Checkers::switchCurrentPlayer()
 {
     nextTurn();
-    currentPlayer = ++currentPlayer % 2;
+    currentPlayer = getEnnemy();
 
     notifyViews(PLAYER_SWITCHED);
 }
@@ -216,4 +227,14 @@ std::pair<Point, std::vector<Point>> & Checkers::getChosenMove()
 Point & Checkers::getCurrentPiecePosition()
 {
     return this->currentPiecePosition;
+}
+
+const unsigned Checkers::getEnnemy() const
+{
+    return (currentPlayer + 1) % 2;
+}
+
+bool Checkers::isGameOver()
+{
+    return players.at(getEnnemy()).getNumberOfMen() == 0;
 }

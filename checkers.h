@@ -43,6 +43,7 @@ public:
     const unsigned getTurn() const;
     const Player &getCurrentPlayer() const;
     const bool isMultiplayer() const;
+    const unsigned getEnnemy() const;
 
     Point & getCurrentPiecePosition();
     void makeMove(Point dest);
@@ -52,7 +53,7 @@ public:
     //tours et fin de la partie
     void nextTurn();
     void isTurnOver(); //ptet pas nécéssaire
-    void isGameOver(); //si abandon,si fin impossible, si victoire
+    bool isGameOver(); //si abandon,si fin impossible, si victoire
 
 
     std::vector< std::pair<Point, std::vector<Point>> > getMovablePositionsFrom(

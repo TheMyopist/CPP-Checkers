@@ -150,14 +150,12 @@ void CheckersView::selectMovePosition(const Point & destination)
 void CheckersView::displayEndOfGame()
 {
     QMessageBox msgBox(this);
-    QPushButton *quitB = msgBox.addButton(tr("Retour au menu principal"),
+    QPushButton *backToMenu = msgBox.addButton(tr("Retour au menu principal"),
                                           QMessageBox::YesRole);
-
-    msgBox.addButton(tr("Recommencer"), QMessageBox::NoRole);
-    msgBox.setText(tr("<strong>Fin de partie :<strong>"));
+    msgBox.setText(tr("<strong>Fin de partie!<strong>"));
     msgBox.setWindowFlags(msgBox.windowFlags() ^ Qt::WindowCloseButtonHint);
     msgBox.exec();
 
-    if(((QPushButton*) msgBox.clickedButton()) == quitB)
+    if(((QPushButton*) msgBox.clickedButton()) == backToMenu)
         emit displayingStopped();
 }

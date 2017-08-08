@@ -26,7 +26,7 @@ public:
     * \brief Instancie un joueur de la couleur passée en paramètre
     * et dont le nombre de dames est de 20 par défaut.
     */
-    Player(const unsigned, unsigned = 20);
+    Player(const unsigned, unsigned = 1);
 
     /**
     * \brief Retourne la couleur du joueur
@@ -44,7 +44,7 @@ public:
     /**
     * \brief Supprime une ou plusieurs dames du  joueur.
     */
-    void removeMen(const unsigned);
+    void removeMan();
 };
 
 inline const unsigned Player::getColor() const

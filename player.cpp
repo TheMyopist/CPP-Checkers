@@ -4,3 +4,7 @@ Player::Player(const unsigned color, unsigned numberOfMen) :
     color{color}, numberOfMen{numberOfMen} {}
 
 
+void Player::removeMan()
+{
+    numberOfMen--;
+}
