@@ -238,3 +238,34 @@ bool Checkers::isGameOver()
 {
     return players.at(getEnnemy()).getNumberOfMen() == 0;
 }
+
+bool Checkers::canMakeMove()
+{
+    std::vector<Point> positions;
+    bool canMove = false;
+
+    for (int i = 0; i < (int)board.getHeight(); i++ )
+    {
+        for (int j = 0; j < (int)board.getWidth(); j++ )
+        {
+            if(getCellAt(Point{j,i}).getColor() == currentPiece.getColor())
+            {
+                positions.push_back(Point{j,i});
+            }
+        }
+    }
+
+    Point currentPiecePositionCpy = currentPiecePosition;
+
+    for(Point & position : positions)
+    {
+        this->setCurrentPiecePosition(position);
+        auto movablePosition = getMovablePositionsFrom(position);
+
+        canMove = (canMove || (movablePosition.size() > 0));
+    }
+
+    this->setCurrentPiecePosition(currentPiecePositionCpy);
+
+    return canMove;
+}

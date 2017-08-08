@@ -1,39 +1,69 @@
 #include "board.h"
 
-
-board::board(const unsigned int height, const unsigned int width)
+//colorie les cell et place les joueurs en position de départ
+Board::Board(const unsigned int height, const unsigned int width)
     : height{height}, width{width},
-      grid(height,
-            std::vector<Cell>(width,{GREY,true})) {} //[row][column]{}
-
-bool board::isCellEmpty(Cell &cell) const
+      grid(height, std::vector<Cell>(width,{GREY}))
 {
-    return cell.isEmpty();
+    colorize();
+    initMen();
 }
 
-void board::colorize()
+bool Board::isCellEmpty(const Point & position)
 {
-    for (int i = 0; i < height; i++ )
-    {
-        unsigned color = (i % 2 == 0) ? BLACK : WHITE;
+    return getCellAt(position).isEmpty() && isOnBoard(position);
+}
 
-        for (int j = 0; j < width; j++ )
+bool Board::isOnBoard(const Point & position) const
+{
+    return (position.getY() < (int)height && position.getY() >= 0)
+            && (position.getX() < (int)width && position.getX() >= 0);
+}
+
+void Board::colorize()
+{
+    for (int i = 0; i < (int)height; i++ )
+    {
+        unsigned color = (i % 2 == 0) ? WHITE : BLACK;
+
+        for (int j = 0; j < (int)width; j++ )
         {
-            colorizeCell(Point{i,j}, color);
-            color = (color == BLACK) ? WHITE : BLACK;
+            colorizeCell(Point{j,i}, color);
+            color = (color == WHITE) ? BLACK : WHITE;
         }
     }
 }
 
-
-void board::colorizeCell(const Point & position, const unsigned color)
+void Board::colorizeCell(const Point & position, const unsigned color)
 {
     getCellAt(position).colorize(color);
 }
 
-void board::clearCell(const Point & position)
+void Board::clearCell(const Point & position)
 {
     getCellAt(position).clear();
 }
 
+//cast to int for suppressing const/unsigned incompatibility warnings
+void Board::initMen()
+{
+    for (int i = 0; i < 4; i++ )
+    {
+        for (int j = 0; j < (int)width; j++ )
+        {
+            Point positionDown{(int)(width -1)-j,(int)(height-1)-i};
+            Point positionTop{j,i};
+            
+            if(getCellAt(positionTop).getColor() == BLACK)
+            {
+                getCellAt(positionTop).addMan(BLACK); //BLACK
+                getCellAt(positionDown).addMan(WHITE); //WHITE
+            }
+        }
+    }
+}
 
+Cell & Board::getCellAt(const Point & position)
+{
+    return grid.at(position.getX()).at(position.getY());
+}
