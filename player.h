@@ -20,19 +20,22 @@ private:
     */
     unsigned numberOfMen;
 
+    bool isIAPlayer;
 
 public:
     /**
     * \brief Instancie un joueur de la couleur passée en paramètre
     * et dont le nombre de dames est de 20 par défaut.
     */
-    Player(const unsigned, unsigned = 1);
+    Player(const unsigned, unsigned = 20, bool = false);
 
     /**
     * \brief Retourne la couleur du joueur
     * \return Une valeur héxadécimale désignant une couleur.
     */
     const unsigned getColor() const;
+
+    const bool getIsIAPlayer() const;
 
     /**
     * \brief Retourne le nombre de dames restants au joueur.
@@ -45,6 +48,8 @@ public:
     * \brief Supprime une ou plusieurs dames du  joueur.
     */
     void removeMan();
+
+    virtual void play();
 };
 
 inline const unsigned Player::getColor() const

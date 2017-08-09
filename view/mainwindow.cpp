@@ -2,7 +2,7 @@
 
 MainWindow::MainWindow(QWidget * parent) :
     QMainWindow{parent}, mainMenu{new MainMenu{this}},
-    bar{new QMenuBar{this}}, checkersView{new CheckersView{this}},
+    bar{new QMenuBar{this}}, checkersView{0},
     menu{new QMenu}
 {
     this->setWindowTitle("Checkers");
@@ -27,30 +27,46 @@ void MainWindow::setMenuBar()
 void MainWindow::displayMainMenu()
 {
     this->menuBar()->hide();
-    this->checkersView->setParent(0);
-    this->checkersView->hide();
+
+    if (checkersView != 0)
+    {
+        this->checkersView->setParent(0);
+        this->checkersView->hide();
+    }
+
     this->setCentralWidget(this->mainMenu);
     this->mainMenu->show();
     this->adjustSize();
 }
 
-void MainWindow::displayCheckers()
+void MainWindow::displayCheckers(bool multiplayer)
 {
     this->menuBar()->show();
     this->mainMenu->setParent(0);
     this->mainMenu->hide();
+    this->checkersView = new CheckersView{this, multiplayer};
     this->setCentralWidget(this->checkersView);
     this->checkersView->show();
     this->adjustSize();
 }
 
-void MainWindow::connectAll()
+void MainWindow::displayCheckersMulti()
 {
-    QObject::connect(this->mainMenu, SIGNAL(newMultiplayerGameSelected()),
-                     this, SLOT(displayCheckers()));
-    QObject::connect(this->checkersView, SIGNAL(displayingStarted()), this, SLOT(displayCheckers()));
-    QObject::connect(this->checkersView, SIGNAL(displayingStopped()), this, SLOT(displayMainMenu()));
+    displayCheckers(true);
 }
 
+void MainWindow::displayCheckersAI()
+{
+    displayCheckers(false);
+}
+
+void MainWindow::connectAll()
+{
+
+    QObject::connect(this->mainMenu, SIGNAL(newMultiplayerGameSelected()),
+                     this, SLOT(displayCheckersMulti()));
+    QObject::connect(this->mainMenu, SIGNAL(newVersusAIGameSelected()),
+                     this, SLOT(displayCheckersAI()));
+}
 
 MainWindow::~MainWindow() {}

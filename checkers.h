@@ -9,13 +9,14 @@
 #include <algorithm>
 
 class CheckersView;
+class Player;
 
 class Checkers
 {
 private:
 
     Board board;
-    std::vector<Player> players;
+    std::vector<Player*> players;
     unsigned currentPlayer;
     Man currentPiece;
     Point currentPiecePosition;
@@ -29,7 +30,7 @@ private:
 
 
 public:
-    Checkers(const bool = false); //par défaut on joue contre l'IA, voir si const ici ok
+    Checkers(const bool = true); //par défaut on joue contre humain voir si const ici ok
 
     ~Checkers();
 
@@ -39,20 +40,18 @@ public:
 
     std::pair<Point, std::vector<Point>> & getChosenMove();
     Board & getBoard(); //le get modifie pas le board, mais le board peut être modifié par une autre fonction qui appellele get
-    const std::vector<Player> & getPlayers() const;
+    std::vector<Player *> getPlayers();
     const unsigned getTurn() const;
-    const Player &getCurrentPlayer() const;
+    Player *getCurrentPlayer();
     const bool isMultiplayer() const;
     const unsigned getEnnemy() const;
 
     Point & getCurrentPiecePosition();
     void makeMove(Point dest);
+    bool canMakeMove();
     bool isOnCrownLine(const Point &) const;
     bool isInTheRightDirection(const Point & position) const;
 
-    //tours et fin de la partie
-    void nextTurn();
-    void isTurnOver(); //ptet pas nécéssaire
     bool isGameOver(); //si abandon,si fin impossible, si victoire
 
 
@@ -102,14 +101,14 @@ inline Board & Checkers::getBoard()
     return board;
 }
 
-inline const Player & Checkers::getCurrentPlayer() const
+inline Player * Checkers::getCurrentPlayer()
 {
     return this->players.at(currentPlayer);
 }
 
-inline const std::vector<Player> & Checkers::getPlayers() const
+inline  std::vector<Player*> Checkers::getPlayers()
 {
-    return players;
+    return this->players;
 }
 
 #endif // CHECKERS_H

@@ -39,6 +39,8 @@ private:
          */
     void connectAll();
 
+
+
     CheckersView  * checkersView;
 
 public:
@@ -56,7 +58,11 @@ public slots:
     /*!
      * \brief Permet d'afficher le niveau.
      */
-    void displayCheckers();
+    void displayCheckers(bool = true);
+
+    void displayCheckersMulti();
+
+    void displayCheckersAI();
 };
 
 #endif // MAINWINDOW_H

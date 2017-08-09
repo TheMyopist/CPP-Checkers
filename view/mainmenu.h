@@ -26,11 +26,12 @@ public:
 
 signals:
 
-    void newMultiplayerGameSelected();
-    void newVersusAIGameSelected();
+    void newMultiplayerGameSelected(bool = true);
+    void newVersusAIGameSelected(bool = false);
 
 private slots:
     void startMultiplayerGame();
+    void startSoloGame();
 };
 
 #endif // MENU_H

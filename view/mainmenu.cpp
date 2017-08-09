@@ -9,7 +9,7 @@ MainMenu::MainMenu(QWidget *parent) : QFrame(parent),
 
    QObject::connect(quitButton, SIGNAL(clicked()), qApp, SLOT(quit()));
    QObject::connect(multiplayerButton, SIGNAL(clicked()), this, SLOT(startMultiplayerGame()));
-   //QObject::connect(soloButton, SIGNAL(clicked()), qApp, SLOT(quit()));
+   QObject::connect(soloButton, SIGNAL(clicked()), this, SLOT(startSoloGame()));
 
 
    lay->addWidget(this->setLogo());
@@ -35,4 +35,9 @@ QLabel * MainMenu::setLogo()
 void MainMenu::startMultiplayerGame()
 {
     emit newMultiplayerGameSelected();
+}
+
+void MainMenu::startSoloGame()
+{
+    emit newVersusAIGameSelected();
 }

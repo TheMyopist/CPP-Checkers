@@ -47,8 +47,8 @@ void Board::clearCell(const Point & position)
 //cast to int for suppressing const/unsigned incompatibility warnings
 void Board::initMen()
 {
-    getCellAt(Point{1,0}).addMan(BLACK);
-    getCellAt(Point{6,7}).addMan(WHITE);
+    getCellAt(Point{1,0}).addMan(BLACK); //BLACK
+    getCellAt(Point{2,5}).addMan(WHITE); //WHITE
 //    for (int i = 0; i < 4; i++ )
 //    {
 //        for (int j = 0; j < (int)width; j++ )

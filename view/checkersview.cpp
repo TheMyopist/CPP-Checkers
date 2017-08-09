@@ -5,8 +5,8 @@
 #include <QMainWindow>
 #include <iostream>
 
-CheckersView::CheckersView(QWidget * parent)
-    : QGraphicsView(parent), scene{new QGraphicsScene}, checkers{new Checkers{}},
+CheckersView::CheckersView(QWidget * parent, bool multiplayer)
+    : QGraphicsView(parent), scene{new QGraphicsScene}, checkers{new Checkers{multiplayer}},
       grid{checkers->getBoard().getHeight(), std::vector<CellView*>(checkers->getBoard().getWidth())},
       men{checkers->getBoard().getHeight(), std::vector<ManView*>(checkers->getBoard().getWidth())}
 {
@@ -29,7 +29,11 @@ CheckersView::CheckersView(QWidget * parent)
                 ManView* manView = new ManView{man, position, this};
 
                 men[j][i] = manView;
-                manView->setClickable(man.getColor() == checkers->getCurrentPlayer().getColor());
+
+
+                manView->setClickable( !checkers->getCurrentPlayer()->getIsIAPlayer() &&
+                            (man.getColor() == checkers->getCurrentPlayer()->getColor()));
+
                 this->scene->addItem(manView);
             }
             else
@@ -37,28 +41,26 @@ CheckersView::CheckersView(QWidget * parent)
         }
     }
     this->checkers->addView(this);
-}
 
-void CheckersView::startMultiplayerGame()
-{
-    //TO DO
-    std::cout << "multi commencé";
-    emit displayingStarted();
+    if (checkers->getCurrentPlayer()->getIsIAPlayer())
+        this->checkers->getCurrentPlayer()->play();
 }
 
 void CheckersView::update(unsigned checkersEvent)
 {
     switch(checkersEvent)
     {
+//    case GAME_STARTED : displayFirstPlayer(); TO DO
+//         break;
     case MOVE_MADE : updatePositions();
         break;
     case PLAYER_SWITCHED : switchPlayer();
         break;
     case END_OF_GAME : displayEndOfGame();
+        break;
     }
 }
 
-// faire destructeur qui free les cellViews
 CheckersView::~CheckersView()
 {
     free(this->checkers);
@@ -66,38 +68,47 @@ CheckersView::~CheckersView()
 
 void CheckersView::switchPlayer()
 {
-    for(int i = 0; i < men.size(); i++ )
-        for(int j = 0; j < men.at(i).size(); j++)
-            if (men[i][j] != 0)
-                men[i][j]->setClickable(men[i][j]->getMan().getColor()
-                                        == checkers->getCurrentPlayer().getColor());
+    if (!checkers->getCurrentPlayer()->getIsIAPlayer())
+    {
+        for(int i = 0; i < men.size(); i++ )
+            for(int j = 0; j < men.at(i).size(); j++)
+                if (men[i][j] != 0)
+                    men[i][j]->setClickable(men[i][j]->getMan().getColor()
+                                            == checkers->getCurrentPlayer()->getColor());
+   }
+   else
+   {
+      std::cout << "nigga" << std::endl;
+      this->checkers->getCurrentPlayer()->play();
+   }
+
     this->disableAllCells();
 }
 
 void CheckersView::updatePositions()
 {
-   Point manToMoveViewPos  = checkers->getCurrentPiecePosition();
-   ManView * manToMoveView = men[manToMoveViewPos.getX()][manToMoveViewPos.getY()];
-   Point manToMoveDest = checkers->getChosenMove().first;
-   ManView * newMan = new ManView{manToMoveView->getMan(), manToMoveDest, this};
+    Point manToMoveViewPos  = checkers->getCurrentPiecePosition();
+    ManView * manToMoveView = men[manToMoveViewPos.getX()][manToMoveViewPos.getY()];
+    Point manToMoveDest = checkers->getChosenMove().first;
+    ManView * newMan = new ManView{manToMoveView->getMan(), manToMoveDest, this};
 
-   this->scene->removeItem(manToMoveView);
-   delete manToMoveView;
+    this->scene->removeItem(manToMoveView);
+    delete manToMoveView;
 
-   men[manToMoveViewPos.getX()][manToMoveViewPos.getY()] = 0;
-   men[manToMoveDest.getX()][manToMoveDest.getY()] = newMan ;
+    men[manToMoveViewPos.getX()][manToMoveViewPos.getY()] = 0;
+    men[manToMoveDest.getX()][manToMoveDest.getY()] = newMan ;
 
-   this->scene->addItem(newMan);
+    this->scene->addItem(newMan);
 
-   for (auto & positionToClear : this->checkers->getChosenMove().second)
-   {
-       ManView * manToDl = men[positionToClear.getX()][positionToClear.getY()];
+    for (auto & positionToClear : this->checkers->getChosenMove().second)
+    {
+        ManView * manToDl = men[positionToClear.getX()][positionToClear.getY()];
 
-       this->scene->removeItem(manToDl);
-       delete manToDl;
+        this->scene->removeItem(manToDl);
+        delete manToDl;
 
-       men[positionToClear.getX()][positionToClear.getY()] = 0;
-   }
+        men[positionToClear.getX()][positionToClear.getY()] = 0;
+    }
 }
 
 void CheckersView::selectPieceToPlay(Point & selectedPiecePos)
@@ -114,13 +125,13 @@ void CheckersView::selectPieceToPlay(Point & selectedPiecePos)
 }
 
 void CheckersView::highlightMovablepositions(std::vector< std::pair<Point, std::vector<Point>> > &
-                        movablepositions)
+                                             movablepositions)
 {
-   for (auto & movableposition : movablepositions)
-   {
-       this->grid[movableposition.first.getX()][movableposition.first.getY()]->highlight();
-       this->grid[movableposition.first.getX()][movableposition.first.getY()]->setClickable(true);
-   }
+    for (auto & movableposition : movablepositions)
+    {
+        this->grid[movableposition.first.getX()][movableposition.first.getY()]->highlight();
+        this->grid[movableposition.first.getX()][movableposition.first.getY()]->setClickable(true);
+    }
 }
 
 void CheckersView::disableAllMen()
@@ -151,7 +162,7 @@ void CheckersView::displayEndOfGame()
 {
     QMessageBox msgBox(this);
     QPushButton *backToMenu = msgBox.addButton(tr("Retour au menu principal"),
-                                          QMessageBox::YesRole);
+                                               QMessageBox::YesRole);
     msgBox.setText(tr("<strong>Fin de partie!<strong>"));
     msgBox.setWindowFlags(msgBox.windowFlags() ^ Qt::WindowCloseButtonHint);
     msgBox.exec();

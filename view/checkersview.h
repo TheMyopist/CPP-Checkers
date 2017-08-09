@@ -24,7 +24,7 @@ class CheckersView : public QGraphicsView
     QGraphicsScene * scene;
 
 public:
-    CheckersView(QWidget * parent);
+    CheckersView(QWidget * parent, bool = true);
 
     ~CheckersView();
 
@@ -45,8 +45,6 @@ public:
 
     void selectMovePosition(const Point &);
 
-    void displayEndOfGame();
-
 signals:
 
     /*!
@@ -60,15 +58,8 @@ signals:
     void displayingStopped();
 
 public slots:
-    /*!
-     * \brief démarre une partie humain contre humain
-     */
-    void startMultiplayerGame();
-    /*!
-     * \brief démarre une partie humain contre IA
-     */
-    //TO DO QUAND AI OK
-    //void startSoloGame();
+
+    void displayEndOfGame();
 };
 
 #endif // BOARDVIEW_H

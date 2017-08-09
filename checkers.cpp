@@ -3,7 +3,7 @@
 #include <iostream>
 
 Checkers::Checkers(const bool isMultiplayer) : turn{0},
-    gameOver{false}, board{Board()}, currentPlayer{(unsigned)rand() % 1}
+    gameOver{false}, board{Board()}, currentPlayer{(unsigned)rand() % 2}
 {
     initPlayers(isMultiplayer);
 }
@@ -11,13 +11,8 @@ Checkers::Checkers(const bool isMultiplayer) : turn{0},
 void Checkers::initPlayers(const bool isMultiplayer)
 {
     if(isMultiplayer)
-        players = {Player{BLACK},Player{WHITE}};
-    else players = {Player{BLACK},IAplayer{WHITE}};
-}
-
-void Checkers::nextTurn()
-{
-    turn++;
+        players = {new Player{WHITE}, new Player{BLACK}};
+    else players = {new Player{WHITE}, new IAplayer{this,BLACK}};
 }
 
 void Checkers::removeMan(const Point position)
@@ -32,6 +27,7 @@ void Checkers::addMan(const Point & position,const Man & man)
 
 void Checkers::makeMove(Point dest)
 {
+
     int index = 0; int i = 0;
     std::vector< std::pair<Point, std::vector<Point>> > movablePositions
             = getMovablePositionsFrom(currentPiecePosition);
@@ -54,18 +50,13 @@ void Checkers::makeMove(Point dest)
 
     for (Point & capturedEnemyPosition : chosenMove.second) {
         removeMan(capturedEnemyPosition);
-        players.at(getEnnemy()).removeMan();
+        players.at(getEnnemy())->removeMan();
     }
 
     notifyViews(MOVE_MADE);
 
-    std::cout << players[0].getNumberOfMen() << std::endl;
-
-    std::cout << players[1].getNumberOfMen() << std::endl;
-
     if(isGameOver())
     {
-        std::cout << "game ended in model";
         notifyViews(END_OF_GAME);
     }
     else switchCurrentPlayer();
@@ -207,7 +198,6 @@ Checkers::~Checkers(){}
 
 void Checkers::switchCurrentPlayer()
 {
-    nextTurn();
     currentPlayer = getEnnemy();
 
     notifyViews(PLAYER_SWITCHED);
@@ -236,7 +226,8 @@ const unsigned Checkers::getEnnemy() const
 
 bool Checkers::isGameOver()
 {
-    return players.at(getEnnemy()).getNumberOfMen() == 0;
+    return (players.at(getEnnemy())->getNumberOfMen() == 0)
+           || !canMakeMove();
 }
 
 bool Checkers::canMakeMove()
@@ -248,7 +239,9 @@ bool Checkers::canMakeMove()
     {
         for (int j = 0; j < (int)board.getWidth(); j++ )
         {
-            if(getCellAt(Point{j,i}).getColor() == currentPiece.getColor())
+            if((!board.getCellAt(Point{j,i}).isEmpty())
+                    && (board.getCellAt(Point{j,i}).getMan().getColor() ==
+                        players.at(getEnnemy())->getColor()))
             {
                 positions.push_back(Point{j,i});
             }
@@ -263,9 +256,11 @@ bool Checkers::canMakeMove()
         auto movablePosition = getMovablePositionsFrom(position);
 
         canMove = (canMove || (movablePosition.size() > 0));
+        std::cout << movablePosition.size() << std::endl;
     }
 
     this->setCurrentPiecePosition(currentPiecePositionCpy);
 
     return canMove;
 }
+
