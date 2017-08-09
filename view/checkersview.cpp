@@ -32,7 +32,7 @@ CheckersView::CheckersView(QWidget * parent, bool multiplayer)
 
 
                 manView->setClickable( !checkers->getCurrentPlayer()->getIsIAPlayer() &&
-                            (man.getColor() == checkers->getCurrentPlayer()->getColor()));
+                                       (man.getColor() == checkers->getCurrentPlayer()->getColor()));
 
                 this->scene->addItem(manView);
             }
@@ -50,8 +50,8 @@ void CheckersView::update(unsigned checkersEvent)
 {
     switch(checkersEvent)
     {
-//    case GAME_STARTED : displayFirstPlayer(); TO DO
-//         break;
+    //    case GAME_STARTED : displayFirstPlayer(); TO DO
+    //         break;
     case MOVE_MADE : updatePositions();
         break;
     case PLAYER_SWITCHED : switchPlayer();
@@ -75,13 +75,8 @@ void CheckersView::switchPlayer()
                 if (men[i][j] != 0)
                     men[i][j]->setClickable(men[i][j]->getMan().getColor()
                                             == checkers->getCurrentPlayer()->getColor());
-   }
-   else
-   {
-      std::cout << "nigga" << std::endl;
-      this->checkers->getCurrentPlayer()->play();
-   }
-
+    }
+    else this->checkers->getCurrentPlayer()->play();
     this->disableAllCells();
 }
 

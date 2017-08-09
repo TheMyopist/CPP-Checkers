@@ -1,4 +1,5 @@
 #include "iaplayer.h"
+#include <iostream>
 
 IAplayer::IAplayer(Checkers *checkers, const unsigned color,
                    const unsigned intelligence) : Player{color, 20, true},
@@ -25,6 +26,7 @@ std::pair<Point,Point>  IAplayer::priorityToMovement()
                     && (checkers->getBoard().getCellAt(Point{j,i}).getMan().getColor() ==
                         checkers->getCurrentPlayer()->getColor()))
             {
+                checkers->setCurrentPiecePosition(Point{j,i});
                 movablesPositions = checkers->getMovablePositionsFrom(Point{j,i});
 
                 //si il y a moyen de bouger avec ce pion
@@ -34,13 +36,27 @@ std::pair<Point,Point>  IAplayer::priorityToMovement()
                     movement.first = Point{j,i};
                     //calcul de la destination
                     movement.second
-                            = trimDestinationWithPriorityToMovement
+                            = trimRandomDestination
                             (movablesPositions);
+
+                    return movement;
                 }
             }
         }
     }
     return movement;
+}
+
+Point  IAplayer::trimFirstPossibleDestination
+(std::vector< std::pair<Point, std::vector<Point>> > movablesPositions)
+{
+    return Point{movablesPositions[0].first};
+}
+
+Point  IAplayer::trimRandomDestination
+(std::vector< std::pair<Point, std::vector<Point>> > movablesPositions)
+{
+    return Point{movablesPositions[rand() % movablesPositions.size()].first};
 }
 
 Point  IAplayer::trimDestinationWithPriorityToMovement
@@ -54,7 +70,8 @@ Point  IAplayer::trimDestinationWithPriorityToMovement
            return destination = movable.first;
     }
 
-    destination = movablesPositions[0].first;
+    destination = movablesPositions[rand() % movablesPositions.size()].first;
 
     return destination;
 }
+

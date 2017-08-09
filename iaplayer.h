@@ -20,7 +20,13 @@ public:
 
     std::pair<Point,Point> priorityToMovement();
 
-    Point trimDestinationWithPriorityToMovement(std::vector< std::pair<Point, std::vector<Point>> > movablesPositions);
+    Point trimFirstPossibleDestination(std::vector< std::pair<Point, std::vector<Point>> > movablesPositions);
+
+    Point trimRandomDestination
+    (std::vector< std::pair<Point, std::vector<Point>> > movablesPositions);
+
+    Point trimDestinationWithPriorityToMovement
+    (std::vector< std::pair<Point, std::vector<Point>> > movablesPositions);
 };
 
 #endif // IAPLAYER_H

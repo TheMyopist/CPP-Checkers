@@ -256,7 +256,6 @@ bool Checkers::canMakeMove()
         auto movablePosition = getMovablePositionsFrom(position);
 
         canMove = (canMove || (movablePosition.size() > 0));
-        std::cout << movablePosition.size() << std::endl;
     }
 
     this->setCurrentPiecePosition(currentPiecePositionCpy);
