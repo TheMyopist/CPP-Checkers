@@ -4,7 +4,7 @@
 IAplayer::IAplayer(Checkers *checkers, const unsigned color,
                    const unsigned intelligence) : Player{color, 20, true},
     checkers{checkers},
-    intelligence{intelligence} {}
+    behaviour{intelligence} {}
 
 void IAplayer::play()
 {
@@ -35,9 +35,7 @@ std::pair<Point,Point>  IAplayer::priorityToMovement()
                     //le point de départ est set
                     movement.first = Point{j,i};
                     //calcul de la destination
-                    movement.second
-                            = trimRandomDestination
-                            (movablesPositions);
+                    movement.second = trimDestination(movablesPositions);
 
                     return movement;
                 }
@@ -45,6 +43,23 @@ std::pair<Point,Point>  IAplayer::priorityToMovement()
         }
     }
     return movement;
+}
+
+Point IAplayer::trimDestination(std::vector< std::pair<Point, std::vector<Point>> > movablesPositions)
+{
+    Point destination;
+
+    switch(behaviour)
+    {
+    case 0 : destination = trimFirstPossibleDestination(movablesPositions);
+        break;
+    case 1 : destination = trimRandomDestination(movablesPositions);
+        break;
+    case 2 : destination = trimDestinationWithPriorityToMovement(movablesPositions);
+        break;
+    }
+    std::cout << behaviour;
+    return destination;
 }
 
 Point  IAplayer::trimFirstPossibleDestination
@@ -67,7 +82,7 @@ Point  IAplayer::trimDestinationWithPriorityToMovement
     for(auto & movable : movablesPositions)
     {
         if(movable.second.size() == 0)
-           return destination = movable.first;
+            return destination = movable.first;
     }
 
     destination = movablesPositions[rand() % movablesPositions.size()].first;
